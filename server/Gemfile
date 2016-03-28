@@ -1,12 +1,14 @@
 source 'https://rubygems.org'
 
-# Web application framework
+# web application framework
 gem 'sinatra'
-gem 'sinatra-contrib'
 gem 'thin'
 
 # ODM framework for MongoDB
 gem 'mongoid'
 
-# User authentication
+# a configuration file format
+gem 'toml-rb', require: 'toml'
+
+# user authentication
 gem 'jwt'
