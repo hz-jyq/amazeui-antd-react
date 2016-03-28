@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # web application framework
-gem 'sinatra'
+gem 'sinatra', require: 'sinatra/base'
 gem 'thin'
 
 # ODM framework for MongoDB
