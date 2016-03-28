@@ -1,0 +1,12 @@
+source 'https://rubygems.org'
+
+# Web application framework
+gem 'sinatra'
+gem 'sinatra-contrib'
+gem 'thin'
+
+# ODM framework for MongoDB
+gem 'mongoid'
+
+# User authentication
+gem 'jwt'
