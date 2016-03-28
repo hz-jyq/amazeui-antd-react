@@ -1,0 +1,21 @@
+import React, {Component} from 'react';
+import {Router, Route, IndexRoute, browserHistory} from 'react-router';
+import {Topbar,NavItem,Nav}from 'amazeui-react';
+export default class Top extends Component {
+  render() {
+      return (
+          <div>
+
+              <Topbar brand="Amaze UI" toggleNavKey="nav">
+                  <CollapsibleNav eventKey="nav">
+                      <Nav topbar>
+                          <NavItem active href="http://www.amazeui.org">首页</NavItem>
+                          <NavItem href="http://www.amazeui.org">开始使用</NavItem>
+                          <NavItem href="http://www.amazeui.org">按需定制</NavItem>
+                      </Nav>
+                  </CollapsibleNav>
+              </Topbar>
+          </div>
+    );
+  }
+}
