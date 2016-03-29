@@ -11,7 +11,7 @@ gem 'mongoid'
 gem 'toml-rb', require: 'toml'
 
 # user authentication
-gem 'jwt'
+gem 'rack-jwt'
 
 # console
 gem 'pry'

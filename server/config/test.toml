@@ -1,3 +1,6 @@
 [Mongoid.clients.default]
 database = 'aliez_test'
 hosts = ['127.0.0.1:27017']
+
+[session]
+secret = 'f64409832f6e74a593b20a7ccd836eb418afeb881dd8ad9111396e9bfa63fae2'
