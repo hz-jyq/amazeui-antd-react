@@ -20,8 +20,6 @@ class App
     @app.call(env)
   end
 
-  private
-
   def self.authenticate_controller
     Class.new(Sinatra::Base) do
       post '/' do
