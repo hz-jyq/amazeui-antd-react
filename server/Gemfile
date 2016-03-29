@@ -12,3 +12,9 @@ gem 'toml-rb', require: 'toml'
 
 # user authentication
 gem 'jwt'
+
+# console
+gem 'pry'
+
+# development toolkit
+gem 'pry-byebug', group: [:development, :test]
