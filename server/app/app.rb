@@ -6,8 +6,8 @@ Dir["#{ALIEZ_ROOT}/app/controllers/*rb"].each { |f| require f }
 class App
   def initialize
     @app = Rack::Builder.app do
-      use Rack::JWT::Auth, secret: Settings[:session][:secret], exclude: ['/authenticate']
-      map('/authenticate') { run(App.authenticate_controller.new) }
+      use Rack::PostBodyContentTypeParser
+      use Rack::JWT::Auth, secret: Settings[:session][:secret], exclude: ['/users/authenticate']
 
       controllers = ObjectSpace.each_object(Class).select { |klass| klass.include?(Endpoint) }
       controllers.each do |controller|
@@ -18,12 +18,5 @@ class App
 
   def call(env)
     @app.call(env)
-  end
-
-  def self.authenticate_controller
-    Class.new(Sinatra::Base) do
-      post '/' do
-      end
-    end
   end
 end

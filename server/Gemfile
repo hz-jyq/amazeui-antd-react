@@ -11,7 +11,11 @@ gem 'mongoid'
 gem 'toml-rb', require: 'toml'
 
 # user authentication
+gem 'bcrypt'
 gem 'rack-jwt'
+
+# contributed Rack middleware
+gem 'rack-contrib'
 
 # console
 gem 'pry'
