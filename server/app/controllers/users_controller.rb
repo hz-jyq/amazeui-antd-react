@@ -1,2 +1,3 @@
-class UsersController < ApplicationController
+class UsersController < Sinatra::Base
+  include Endpoint
 end

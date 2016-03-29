@@ -1,2 +1,3 @@
-class SessionsController < ApplicationController
+class SessionsController < Sinatra::Base
+  include Endpoint
 end
