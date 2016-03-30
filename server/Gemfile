@@ -7,6 +7,10 @@ gem 'thin'
 # ODM framework for MongoDB
 gem 'mongoid'
 
+# render JSON
+gem 'jbuilder'
+gem 'yajl-ruby', require: 'yajl'
+
 # a configuration file format
 gem 'toml-rb', require: 'toml'
 
