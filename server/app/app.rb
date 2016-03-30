@@ -9,6 +9,15 @@ class App
       use Rack::PostBodyContentTypeParser
       use Rack::JWT::Auth, secret: Settings[:session][:secret], exclude: ['/users/authenticate']
 
+      if Sinatra::Base.development?
+        use Rack::Cors do
+          allow do
+            origins '*'
+            resource '*', headers: :any, methods: :any
+          end
+        end
+      end
+
       controllers = ObjectSpace.each_object(Class).select { |klass| klass.include?(Endpoint) }
       controllers.each do |controller|
         map(controller.prefix_uri) { run(controller.new) }

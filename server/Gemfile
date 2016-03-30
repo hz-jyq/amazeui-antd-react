@@ -7,7 +7,7 @@ gem 'thin'
 # ODM framework for MongoDB
 gem 'mongoid'
 
-# render JSON
+# generate JSON objects with a simple DSL
 gem 'jbuilder'
 gem 'tilt-jbuilder', require: 'sinatra/jbuilder'
 
@@ -18,7 +18,10 @@ gem 'toml-rb', require: 'toml'
 gem 'bcrypt'
 gem 'rack-jwt'
 
-# contributed Rack middleware
+# support Cross-Origin Resource Sharing
+gem 'rack-cors', group: :development
+
+# contributed Rack middleware: Rack::PostBodyContentTypeParser, etc.
 gem 'rack-contrib'
 
 # console
