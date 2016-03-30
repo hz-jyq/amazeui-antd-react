@@ -9,7 +9,7 @@ gem 'mongoid'
 
 # render JSON
 gem 'jbuilder'
-gem 'yajl-ruby', require: 'yajl'
+gem 'tilt-jbuilder', require: 'sinatra/jbuilder'
 
 # a configuration file format
 gem 'toml-rb', require: 'toml'
