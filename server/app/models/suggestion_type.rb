@@ -12,4 +12,12 @@ class SuggestionType
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
   validates :visibility, inclusion: %i(public protected)
+
+  def public?
+    visibility == :public
+  end
+
+  def public=(new_public)
+    self.visibility = new_public ? :public : :protected
+  end
 end
