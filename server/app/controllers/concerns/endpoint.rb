@@ -8,6 +8,10 @@ module Endpoint
       def indifferent_params(params)
         ActiveSupport::HashWithIndifferentAccess.new(params)
       end
+
+      def current_user
+        @current_user ||= User.find(env['jwt.payload']['sub'])
+      end
     end
   end
 end
