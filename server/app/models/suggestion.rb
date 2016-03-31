@@ -19,9 +19,9 @@ class Suggestion
     state :drafted, initial: true
     state :reviewing, :rejected, :accepted, :awarded
 
-    event :submit, {}, &-> { transitions from: :drafted,   to: :reviewing }
-    event :reject, {}, &-> { transitions from: :reviewing, to: :rejected  }
-    event :accept, {}, &-> { transitions from: :reviewing, to: :accepted  }
-    event :award,  {}, &-> { transitions from: :accepted,  to: :awarded   }
+    event :submit, &proc { transitions from: :drafted,   to: :reviewing }
+    event :reject, &proc { transitions from: :reviewing, to: :rejected  }
+    event :accept, &proc { transitions from: :reviewing, to: :accepted  }
+    event :award,  &proc { transitions from: :accepted,  to: :awarded   }
   end
 end
