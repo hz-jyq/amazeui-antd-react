@@ -8,11 +8,12 @@ require 'bundler/setup'
 Bundler.require(:default, RACK_ENV)
 
 # Load configurations
-f = File.join(ALIEZ_ROOT, 'config', "#{Sinatra::Base.environment}.toml")
-Settings = ActiveSupport::HashWithIndifferentAccess.new(TOML.parse(ERB.new(File.read(f)).result))
+file = File.join(ALIEZ_ROOT, 'config', "#{Sinatra::Base.environment}.toml")
+Settings = ActiveSupport::HashWithIndifferentAccess.new(TOML.parse(ERB.new(File.read(file)).result))
 
 # Configure Mongoid
 Mongoid.load_configuration(Settings[:Mongoid])
 
 # Initialize app
+Dir["#{ALIEZ_ROOT}/config/initializers/*rb"].each { |f| require f }
 require File.join(ALIEZ_ROOT, 'app', 'app')
