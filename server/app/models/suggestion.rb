@@ -13,8 +13,8 @@ class Suggestion
   validates :title, presence: true
   validates :content, presence: true
 
-  # reject: drafted => reviewing => rejected
-  # accept: drafted => reviewing => accepted => awarded
+  # reject: drafted -> reviewing -> rejected
+  # accept: drafted -> reviewing -> accepted -> awarded
   aasm column: :aasm_state do
     state :drafted, initial: true
     state :reviewing, :rejected, :accepted, :awarded

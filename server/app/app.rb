@@ -20,7 +20,7 @@ class App
 
       controllers = ObjectSpace.each_object(Class).select { |klass| klass.include?(Endpoint) }
       controllers.each do |controller|
-        map(controller.prefix_uri) { run(controller.new) }
+        map(controller.url) { run(controller.new) }
       end
     end
   end

@@ -2,7 +2,7 @@ module Endpoint
   extend ActiveSupport::Concern
 
   included do
-    set(:prefix_uri) { "/#{name.underscore.sub(/_controller$/, '')}" }
+    set(:url) { "/#{name.underscore.sub(/_controller$/, '')}" }
 
     helpers do
       def indifferent_params(params)
