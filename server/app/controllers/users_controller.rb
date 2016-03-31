@@ -7,6 +7,6 @@ class UsersController < Sinatra::Base
     halt 401, jbuilder(%(json.error 'wrong username or password')) unless user.authenticate(params[:user][:password])
 
     token = Rack::JWT::Token.encode({ sub: user.id }, Settings[:session][:secret])
-    jbuilder %(json.token '#{token}')
+    halt 201, jbuilder(%(json.token '#{token}'))
   end
 end
