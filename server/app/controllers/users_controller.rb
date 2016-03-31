@@ -11,6 +11,6 @@ class UsersController < Sinatra::Base
   end
 
   get '/' do
-    jbuilder %(json.array! User.all, :_id, :name)
+    jbuilder %(json.array! User.all, :id, :name)
   end
 end
