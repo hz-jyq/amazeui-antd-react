@@ -9,4 +9,8 @@ class UsersController < Sinatra::Base
     token = Rack::JWT::Token.encode({ sub: user.id }, Settings[:session][:secret])
     halt 201, jbuilder(%(json.token '#{token}'))
   end
+
+  get '/' do
+    jbuilder %(json.array! User.all, :_id, :name)
+  end
 end
