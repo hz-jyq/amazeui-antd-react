@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
-import {Breadcrumb,Icon}from 'amazeui-react';
+import {Breadcrumb,Icon,NavItem}from 'amazeui-react';
 export default class BreadcrumbCenter extends Component {
   render() {
     return (

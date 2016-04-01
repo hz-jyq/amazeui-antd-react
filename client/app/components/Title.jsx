@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import {Router, Route, IndexRoute, browserHistory} from 'react-router';
+import {Router, Route, IndexRoute, browserHistory,Link} from 'react-router';
 import {Selected,ButtonToolbar,Header}from 'amazeui-react';
 export default class Title extends Component {
   render() {
       var props = {
-          title: '后台管理',
+          title: '建议系统',
           data: {
               left: [
                   {
-                      link: '#left-link',
+                      link: '/about',
                       icon: 'home',
                   },
                   {
@@ -18,7 +18,7 @@ export default class Title extends Component {
               ],
               right: [
                   {
-                      link: '#user-link',
+                      link: '/',
                       icon: 'user',
                       title:'注销'
                   }

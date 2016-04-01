@@ -8,7 +8,6 @@ export default class AmazeUi extends Component {
           {value: 'two', label: 'Two'},
           {value: 'three', label: 'Three'}
       ];
-
       var props = {
           name: 'selected', // 注意设置 `name` 属性
           data: data,

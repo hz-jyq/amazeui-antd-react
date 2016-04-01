@@ -35,7 +35,7 @@ const common = {
   },
   plugins: [
     new HtmlwebpackPlugin({
-      template: 'app/jsp/main.html',
+      template: 'app/html/main.html',
       inject: 'body'
     })
   ]
