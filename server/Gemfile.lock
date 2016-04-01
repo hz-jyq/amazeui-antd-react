@@ -59,6 +59,7 @@ GEM
     rack-protection (1.5.3)
       rack
     rainbow (2.1.0)
+    rake (10.5.0)
     rubocop (0.39.0)
       parser (>= 2.3.0.7, < 3.0)
       powerpack (~> 0.1)
@@ -100,6 +101,7 @@ DEPENDENCIES
   rack-contrib
   rack-cors
   rack-jwt
+  rake
   rubocop
   sinatra
   thin
