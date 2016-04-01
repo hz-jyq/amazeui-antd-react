@@ -2,7 +2,7 @@ module Endpoint
   extend ActiveSupport::Concern
 
   included do
-    set(:url) { "/#{name.underscore.sub(/_controller$/, '')}" }
+    set(:url) { "/#{name.underscore.sub(/_controller\z/, '')}" }
 
     helpers do
       def indifferent_params(params)
@@ -11,6 +11,11 @@ module Endpoint
 
       def current_user
         @current_user ||= User.find(env['jwt.payload']['sub'])
+      end
+
+      def authorize!(*roles)
+        return if roles.include?(current_user.role)
+        halt 403, jbuilder(%(json.error 'forbidden'))
       end
     end
   end
