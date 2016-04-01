@@ -39,3 +39,9 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rubocop'
 end
+
+# test
+group :test do
+  gem 'rspec'
+  gem 'mongoid-rspec'
+end
