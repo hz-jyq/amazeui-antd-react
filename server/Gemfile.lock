@@ -85,6 +85,7 @@ GEM
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     unicode-display_width (1.0.3)
+    yajl-ruby (1.2.1)
 
 PLATFORMS
   ruby
@@ -104,6 +105,7 @@ DEPENDENCIES
   thin
   tilt-jbuilder
   toml-rb
+  yajl-ruby
 
 BUNDLED WITH
    1.11.2

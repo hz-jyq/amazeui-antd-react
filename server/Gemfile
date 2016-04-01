@@ -13,6 +13,7 @@ gem 'aasm'
 # generate JSON objects with a simple DSL
 gem 'jbuilder'
 gem 'tilt-jbuilder', require: 'sinatra/jbuilder'
+gem 'yajl-ruby', require: 'yajl'
 
 # a configuration file format
 gem 'toml-rb', require: 'toml'
