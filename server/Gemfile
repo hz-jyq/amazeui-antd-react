@@ -47,5 +47,6 @@ group :test do
   gem 'mongoid-rspec'
   gem 'database_cleaner'
   gem 'factory_girl'
+  gem 'ffaker'
   gem 'rack-test'
 end
