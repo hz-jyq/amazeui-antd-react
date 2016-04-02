@@ -40,6 +40,6 @@ class SuggestionTypesController < Sinatra::Base
     s.destroy!
 
     r = jbuilder('')
-    halt 200, r
+    halt 204, r
   end
 end
