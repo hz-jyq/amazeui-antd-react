@@ -10,6 +10,7 @@ class SuggestionType
   has_and_belongs_to_many :reviewers, class_name: 'User'
 
   validates :name, presence: true, uniqueness: true
+  validates :description, presence: true, allow_blank: true
   validates :visibility, inclusion: %i(public protected)
 
   def public?
