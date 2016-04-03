@@ -14,7 +14,7 @@ class SuggestionTypesController < Sinatra::Base
   post '/' do
     p = params[:suggestion_type]
     s = SuggestionType.new(p.slice(:name, :description, :public))
-    s.reviewers = User.find(p[:reviewers].map(&->(r) { r[:id] }))
+    s.reviewers = User.find(p[:reviewers].map(&->(r) { r[:id] })) if p.key?(:reviewers)
     s.save!
 
     r = jbuilder(:'suggestion_types/_suggestion_type', locals: { s: s })
