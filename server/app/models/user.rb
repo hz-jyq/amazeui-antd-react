@@ -11,7 +11,7 @@ class User
   has_and_belongs_to_many :suggestion_types
 
   validates :name, presence: true, uniqueness: true
-  validates :role, inclusion: %i(user manager administrator)
+  validates :role, inclusion: %i(user manager)
 
   has_secure_password
 end

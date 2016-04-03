@@ -3,7 +3,7 @@ class SuggestionTypesController < Sinatra::Base
 
   before do
     pass if request.safe?
-    authorize! :manager, :administrator
+    authorize! :manager
   end
 
   get '/' do
