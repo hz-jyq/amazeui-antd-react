@@ -18,7 +18,7 @@ class App
       use Rack::PostBodyContentTypeParser
       use Rack::JWT::Auth, secret: Settings[:session][:secret], exclude: ['/users/authenticate']
 
-      controllers = ObjectSpace.each_object(Class).select { |klass| klass.include?(Endpoint) }
+      controllers = Object.constants.grep(/Controller\z/).map { |c| Object.const_get(c) }
       controllers.each do |controller|
         map(controller.url) { run(controller.new) }
       end

@@ -7,7 +7,11 @@ require 'rubygems'
 require 'bundler/setup'
 Bundler.require(:default, RACK_ENV)
 
-# Load configurations
+# Global settings
+Sinatra::Base.set(:environment, RACK_ENV.to_sym)
+Sinatra::Base.set(:views, File.join(ALIEZ_ROOT, 'app', 'views'))
+
+# Read configuration files
 file = File.join(ALIEZ_ROOT, 'config', "#{Sinatra::Base.environment}.toml")
 Settings = ActiveSupport::HashWithIndifferentAccess.new(TOML.parse(ERB.new(File.read(file)).result))
 

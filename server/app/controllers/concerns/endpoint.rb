@@ -3,7 +3,6 @@ module Endpoint
 
   included do
     set(:url) { "/#{name.underscore.sub(/_controller\z/, '')}" }
-    set(:views) { "#{ALIEZ_ROOT}/app/views" }
 
     helpers do
       def indifferent_params(params)
