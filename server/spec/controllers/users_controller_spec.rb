@@ -1,22 +1,21 @@
 RSpec.describe UsersController, type: :controller do
   describe 'POST /users/authenticate' do
+    let(:user) { create(:user, password: 'password') }
+
     it 'is expected response code 201' do
-      u = create(:user, password: 'password')
-      post '/users/authenticate', user: { name: u.name, password: 'password' }
+      post '/users/authenticate', user: { name: user.name, password: 'password' }
       expect(response_status).to eq(201)
       expect(response_body_as_json).to have_key('token')
     end
 
     it 'is expected response code 401 when use wrong username' do
-      u = create(:user, password: 'password')
-      post '/users/authenticate', user: { name: "W#{u.name}", password: 'password' }
+      post '/users/authenticate', user: { name: "W#{user.name}", password: 'password' }
       expect(response_status).to eq(401)
       expect(response_body_as_json['error']).to match(/wrong.*username/)
     end
 
     it 'is expected response code 401 when use wrong password' do
-      u = create(:user, password: 'password')
-      post '/users/authenticate', user: { name: u.name, password: 'wrong password' }
+      post '/users/authenticate', user: { name: user.name, password: 'wrong password' }
       expect(response_status).to eq(401)
       expect(response_body_as_json['error']).to match(/wrong.*password/)
     end
