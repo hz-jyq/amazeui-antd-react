@@ -7,12 +7,12 @@ class Suggestion
   field :content, type: String
   field :state, type: Symbol
 
-  belongs_to :user
+  belongs_to :submitter, class_name: 'User'
   belongs_to :suggestion_type
 
   validates :title, presence: true
   validates :content, presence: true
-  validates :user, presence: true
+  validates :submitter, presence: true
   validates :suggestion_type, presence: true
 
   # reject: drafted -> reviewing -> rejected
