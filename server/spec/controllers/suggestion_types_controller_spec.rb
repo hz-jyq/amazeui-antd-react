@@ -3,11 +3,14 @@ RSpec.describe SuggestionTypesController, type: :controller do
     let(:user) { create(:user) }
     before(:each) { authorize(user) }
 
-    it 'could only use safe METHODs' do
+    it 'could only access :index' do
       get '/suggestion_types'
       expect(response_status).to eq(200)
 
       post '/suggestion_types'
+      expect(response_status).to eq(403)
+
+      get '/suggestion_types/1'
       expect(response_status).to eq(403)
 
       put '/suggestion_types/1'
@@ -35,6 +38,18 @@ RSpec.describe SuggestionTypesController, type: :controller do
       it 'expected response code 201' do
         post '/suggestion_types', suggestion_type: { name: '创新建议' }
         expect(response_status).to eq(201)
+
+        keys = %w(id name description public reviewers)
+        keys.each { |key| expect(response_body_as_json).to have_key(key) }
+        expect(response_body_as_json['name']).to eq('创新建议')
+      end
+    end
+
+    describe 'GET /suggestion_types/:id' do
+      it 'expected response code 200' do
+        s = create(:suggestion_type, name: '创新建议')
+        get "/suggestion_types/#{s.id}"
+        expect(response_status).to eq(200)
 
         keys = %w(id name description public reviewers)
         keys.each { |key| expect(response_body_as_json).to have_key(key) }
