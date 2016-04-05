@@ -9,6 +9,7 @@ class Suggestion
 
   belongs_to :submitter, class_name: 'User'
   belongs_to :suggestion_type
+  has_many :reviews
 
   validates :title, presence: true
   validates :content, presence: true
