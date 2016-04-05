@@ -7,9 +7,13 @@ class Suggestion
   field :content, type: String
   field :state, type: Symbol
 
-  belongs_to :submitter, class_name: 'User'
   belongs_to :suggestion_type
+  belongs_to :submitter, class_name: 'User'
+
   has_many :reviews
+  def reviewers # has_many :reviewers through: :reviews
+    User.find(reviews.pluck(:reviewer_id))
+  end
 
   validates :title, presence: true
   validates :content, presence: true
