@@ -9,6 +9,7 @@ class User
 
   has_many :suggestions, dependent: :restrict
   has_and_belongs_to_many :suggestion_types
+  has_many :reviews
 
   validates :name, presence: true, uniqueness: true
   validates :role, inclusion: %i(user manager)

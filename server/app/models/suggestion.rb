@@ -5,17 +5,20 @@ class Suggestion
 
   field :title, type: String
   field :content, type: String
-  field :aasm_state, type: Symbol
+  field :state, type: Symbol
 
-  belongs_to :user
+  belongs_to :submitter, class_name: 'User'
   belongs_to :suggestion_type
+  has_many :reviews
 
   validates :title, presence: true
   validates :content, presence: true
+  validates :submitter, presence: true
+  validates :suggestion_type, presence: true
 
   # reject: drafted -> reviewing -> rejected
   # accept: drafted -> reviewing -> accepted -> awarded
-  aasm column: :aasm_state do
+  aasm column: :state do
     state :drafted, initial: true
     state :reviewing, :rejected, :accepted, :awarded
 

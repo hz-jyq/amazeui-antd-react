@@ -2,7 +2,7 @@ class SuggestionTypesController < Sinatra::Base
   include Endpoint
 
   before do
-    pass if request.safe?
+    pass if request.get? && request.path.chomp('/') == self.class.route_url
     authorize! :manager
   end
 
@@ -19,6 +19,12 @@ class SuggestionTypesController < Sinatra::Base
 
     r = jbuilder(:'suggestion_types/_suggestion_type', locals: { s: s })
     halt 201, r
+  end
+
+  get '/:id' do
+    s = SuggestionType.find(params[:id])
+    r = jbuilder(:'suggestion_types/_suggestion_type', locals: { s: s })
+    halt 200, r
   end
 
   put '/:id' do

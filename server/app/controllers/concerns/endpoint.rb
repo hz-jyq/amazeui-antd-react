@@ -2,7 +2,7 @@ module Endpoint
   extend ActiveSupport::Concern
 
   included do
-    set(:url) { "/#{name.underscore.sub(/_controller\z/, '')}" }
+    set(:route_url) { "/#{name.underscore.sub(/_controller\z/, '')}" }
 
     helpers do
       def indifferent_params(params)

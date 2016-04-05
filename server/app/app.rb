@@ -20,7 +20,7 @@ class App
 
       controllers = Object.constants.grep(/Controller\z/).map { |c| Object.const_get(c) }
       controllers.each do |controller|
-        map(controller.url) { run(controller.new) }
+        map(controller.route_url) { run(controller.new) }
       end
     end
   end
