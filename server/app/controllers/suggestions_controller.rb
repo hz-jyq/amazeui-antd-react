@@ -10,4 +10,12 @@ class SuggestionsController < Sinatra::Base
     r = jbuilder(:'suggestions/_suggestion', locals: { s: s })
     halt 201, r
   end
+
+  get '/:id' do
+    s = Suggestion.find(params[:id])
+    halt 403, jbuilder(%(json.error 'forbidden')) unless s.public? || s.submitter == current_user || s.reviewers.include?(current_user)
+
+    r = jbuilder(:'suggestions/_suggestion', locals: { s: s })
+    halt 200, r
+  end
 end
