@@ -10,6 +10,8 @@ RSpec.describe SuggestionsController, type: :controller do
 
       keys = %w(id title content created_at state suggestion_type submitter reviewers)
       keys.each { |key| expect(response_body_as_json).to have_key(key) }
+      expect(response_body_as_json['title']).to eq('TITLE')
+      expect(response_body_as_json['content']).to eq('CONTENT')
       expect(response_body_as_json['suggestion_type']['name']).to eq(s.name)
       expect(response_body_as_json['submitter']['name']).to eq(user.name)
       expect(response_body_as_json['reviewers'][0]['name']).to eq(s.reviewers[0].name)

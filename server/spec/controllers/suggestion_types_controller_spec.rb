@@ -51,10 +51,6 @@ RSpec.describe SuggestionTypesController, type: :controller do
         s = create(:suggestion_type, name: '创新建议')
         get "/suggestion_types/#{s.id}"
         expect(response_status).to eq(200)
-
-        keys = %w(id name description public reviewers)
-        keys.each { |key| expect(response_body_as_json).to have_key(key) }
-        expect(response_body_as_json['name']).to eq('创新建议')
       end
     end
 
@@ -63,9 +59,6 @@ RSpec.describe SuggestionTypesController, type: :controller do
         s = create(:suggestion_type, name: '创新建议')
         put "/suggestion_types/#{s.id}", suggestion_type: { name: '流程管理' }
         expect(response_status).to eq(200)
-
-        keys = %w(id name description public reviewers)
-        keys.each { |key| expect(response_body_as_json).to have_key(key) }
         expect(response_body_as_json['name']).to eq('流程管理')
       end
     end
