@@ -13,11 +13,22 @@ class SuggestionType
   validates :description, presence: true, allow_blank: true
   validates :visibility, inclusion: %i(public protected)
 
+  before_save :validates_presence_of_reviewers
+
   def public?
     visibility == :public
   end
 
   def public=(new_public)
     self.visibility = new_public ? :public : :protected
+  end
+
+  private
+
+  def validates_presence_of_reviewers
+    return true unless reviewers.empty?
+
+    errors[:reviewers] << %(can't be empty)
+    return false
   end
 end

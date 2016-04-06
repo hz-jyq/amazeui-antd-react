@@ -36,12 +36,13 @@ RSpec.describe SuggestionTypesController, type: :controller do
 
     describe 'POST /suggestion_types' do
       it 'expected response code 201' do
-        post '/suggestion_types', suggestion_type: { name: '创新建议' }
+        post '/suggestion_types', suggestion_type: { name: '创新建议', reviewer_ids: [user.id] }
         expect(response_status).to eq(201)
 
         keys = %w(id name description public reviewers)
         keys.each { |key| expect(response_body_as_json).to have_key(key) }
         expect(response_body_as_json['name']).to eq('创新建议')
+        expect(response_body_as_json['reviewers'][0]['name']).to eq(user.name)
       end
     end
 
