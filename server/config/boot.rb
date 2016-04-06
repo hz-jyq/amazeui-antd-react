@@ -17,6 +17,8 @@ Settings = ActiveSupport::HashWithIndifferentAccess.new(TOML.parse(ERB.new(File.
 
 # Configure Mongoid
 Mongoid.load_configuration(Settings[:Mongoid])
+Mongoid.logger.level = Logger::DEBUG if Sinatra::Base.development?
+Mongo::Logger.logger.level = Logger::DEBUG if Sinatra::Base.development?
 
 # Initialize app
 Dir["#{ALIEZ_ROOT}/config/initializers/*rb"].each { |f| require f }
