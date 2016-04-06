@@ -7,10 +7,10 @@ class User
   field :password_digest, type: String
   field :role, type: Symbol, default: :user
 
-  has_and_belongs_to_many :suggestion_types
+  has_and_belongs_to_many :suggestion_types, dependent: :restrict
   has_many :suggestions, dependent: :restrict
 
-  has_many :reviews
+  has_many :reviews, dependent: :restrict
   def review_suggestions # has_many :review_suggestions through: :reviews
     Suggestion.find(reviews.pluck(:suggestion_id))
   end
