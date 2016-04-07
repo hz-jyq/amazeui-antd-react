@@ -10,6 +10,9 @@ gem 'mongoid'
 # finite state machine
 gem 'aasm'
 
+# paginator
+gem 'will_paginate'
+
 # generate JSON objects with a simple DSL
 gem 'jbuilder'
 gem 'tilt-jbuilder', require: 'sinatra/jbuilder'

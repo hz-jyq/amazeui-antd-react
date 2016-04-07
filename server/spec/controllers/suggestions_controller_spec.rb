@@ -28,7 +28,7 @@ RSpec.describe SuggestionsController, type: :controller do
 
     context 'unpublicized suggestion' do
       let(:suggestion_type) { create(:suggestion_type, public: false) }
-      let(:suggestion) { create(:suggestion, suggestion_type: suggestion_type).tap { |s| s.submit! } }
+      let(:suggestion) { create(:suggestion, suggestion_type: suggestion_type).tap(&:submit!) }
 
       it 'expected response code 200 as a submitter' do
         authorize(suggestion.submitter)

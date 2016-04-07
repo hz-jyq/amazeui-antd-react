@@ -22,5 +22,8 @@ Style/Documentation:
 Style/LambdaCall:
   Enabled: false
 
+Style/PredicateName:
+  Enabled: false
+
 Style/RedundantReturn:
   Enabled: false

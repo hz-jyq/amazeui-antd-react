@@ -32,6 +32,11 @@ class Suggestion
     event :award,  &proc { transitions from: :accepted,  to: :awarded   }
   end
 
+  def self.public
+    ids = SuggestionType.where(visibility: :public).pluck(:id)
+    where(:suggestion_type_id.in => ids)
+  end
+
   private
 
   def drafted_2_reviewing_success_hook

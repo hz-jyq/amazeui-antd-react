@@ -1,6 +1,17 @@
 class SuggestionsController < Sinatra::Base
   include Endpoint
 
+  get '/' do
+    c = case params[:role]
+        when 'submitter' then current_user.suggestions
+        when 'reviewer'  then current_user.review_suggestions
+        else Suggestion.public
+        end
+    c = c.page(params[:page]).per_page(params[:per_page])
+    r = jbuilder %(json.array! c, partial: 'suggestions/suggestion', as: :s)
+    halt 200, r
+  end
+
   post '/' do
     authorize! Suggestion, :creatable?
 
