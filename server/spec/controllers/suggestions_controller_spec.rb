@@ -2,6 +2,45 @@ RSpec.describe SuggestionsController, type: :controller do
   let(:user) { create(:user) }
   before(:each) { authorize(user) }
 
+  describe 'GET /suggestions' do
+    it 'expected response code 200' do
+      create_list(:suggestion, 4)
+      get '/suggestions'
+      expect(response_status).to eq(200)
+      expect(response_body_as_json.size).to eq(4)
+    end
+
+    describe 'with a filter' do
+      before(:each) do
+        create_list(:suggestion, 1, submitter: user).each { |s| s.tap(&:submit!) }
+
+        suggestion_type = create(:suggestion_type, reviewers: [user])
+        create_list(:suggestion, 2, suggestion_type: suggestion_type).each { |s| s.tap(&:submit!) }
+
+        suggestion_type = create(:suggestion_type, public: false)
+        create_list(:suggestion, 4, suggestion_type: suggestion_type).each { |s| s.tap(&:submit!) }
+      end
+
+      it 'expected show resource created by user when use :submitter' do
+        get '/suggestions?filter=submitter'
+        expect(response_status).to eq(200)
+        expect(response_body_as_json.size).to eq(1)
+      end
+
+      it 'expected show resource reviewed by user when use :reviewer' do
+        get '/suggestions?filter=reviewer'
+        expect(response_status).to eq(200)
+        expect(response_body_as_json.size).to eq(2)
+      end
+
+      it 'expected show resource publicized when use nothing' do
+        get '/suggestions'
+        expect(response_status).to eq(200)
+        expect(response_body_as_json.size).to eq(3)
+      end
+    end
+  end
+
   describe 'POST /suggestions' do
     it 'expected response code 201' do
       s = create(:suggestion_type)
@@ -26,7 +65,7 @@ RSpec.describe SuggestionsController, type: :controller do
       expect(response_status).to eq(200)
     end
 
-    context 'unpublicized suggestion' do
+    context 'for unpublicized suggestion' do
       let(:suggestion_type) { create(:suggestion_type, public: false) }
       let(:suggestion) { create(:suggestion, suggestion_type: suggestion_type).tap(&:submit!) }
 

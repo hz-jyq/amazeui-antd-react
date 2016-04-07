@@ -12,6 +12,7 @@ FactoryGirl.define do
     end
 
     before(:create) do |suggestion_type, evaluator|
+      next unless suggestion_type.reviewers.empty?
       suggestion_type.reviewers = create_list(:user, evaluator.reviewers_count)
     end
   end

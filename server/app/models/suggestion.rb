@@ -20,6 +20,8 @@ class Suggestion
   validates :submitter, presence: true
   validates :suggestion_type, presence: true
 
+  scope :publicized, -> { where(:suggestion_type_id.in => SuggestionType.where(visibility: :public).pluck(:id)) }
+
   # reject: drafted -> reviewing -> rejected
   # accept: drafted -> reviewing -> accepted -> awarded
   aasm column: :state do
@@ -30,11 +32,6 @@ class Suggestion
     event :reject, &proc { transitions from: :reviewing, to: :rejected  }
     event :accept, &proc { transitions from: :reviewing, to: :accepted  }
     event :award,  &proc { transitions from: :accepted,  to: :awarded   }
-  end
-
-  def self.public
-    ids = SuggestionType.where(visibility: :public).pluck(:id)
-    where(:suggestion_type_id.in => ids)
   end
 
   private
