@@ -9,7 +9,7 @@ class SuggestionPolicy
   end
 
   def readable?
-    return true if @record.public?
+    return true if @record.suggestion_type.public?
     return @record.submitter == @user || @record.reviewers.include?(@user)
   end
 end
