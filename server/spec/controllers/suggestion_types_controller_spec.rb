@@ -56,13 +56,16 @@ RSpec.describe SuggestionTypesController, type: :controller do
       post '/suggestion_types'
       expect(response_status).to eq(403)
 
-      get '/suggestion_types/1'
+      s = create(:suggestion_type)
+      get "/suggestion_types/#{s.id}"
       expect(response_status).to eq(403)
 
-      put '/suggestion_types/1'
+      s = create(:suggestion_type)
+      put "/suggestion_types/#{s.id}"
       expect(response_status).to eq(403)
 
-      delete '/suggestion_types/1'
+      s = create(:suggestion_type)
+      delete "/suggestion_types/#{s.id}"
       expect(response_status).to eq(403)
     end
   end

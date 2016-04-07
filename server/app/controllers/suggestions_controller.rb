@@ -2,6 +2,8 @@ class SuggestionsController < Sinatra::Base
   include Endpoint
 
   post '/' do
+    authorize! Suggestion, :creatable?
+
     p = params[:suggestion]
     s = SuggestionType.find(p[:suggestion_type_id])
     s = current_user.suggestions.create!(p.slice(:title, :content).merge(suggestion_type: s))
@@ -13,7 +15,7 @@ class SuggestionsController < Sinatra::Base
 
   get '/:id' do
     s = Suggestion.find(params[:id])
-    halt 403, jbuilder(%(json.error 'forbidden')) unless s.public? || s.submitter == current_user || s.reviewers.include?(current_user)
+    authorize! s, :readable?
 
     r = jbuilder(:'suggestions/_suggestion', locals: { s: s })
     halt 200, r

@@ -1,17 +1,14 @@
 class SuggestionTypesController < Sinatra::Base
   include Endpoint
 
-  before do
-    pass if request.get? && request.path.chomp('/') == self.class.route_url
-    authorize! :manager
-  end
-
   get '/' do
     r = jbuilder %(json.array! SuggestionType.all, partial: 'suggestion_types/suggestion_type', as: :s)
     halt 200, r
   end
 
   post '/' do
+    authorize! SuggestionType, :creatable?
+
     p = params[:suggestion_type]
     s = SuggestionType.new(p.slice(:name, :description, :public))
     s.reviewers = User.find(p[:reviewer_ids]) if p.key?(:reviewer_ids)
@@ -23,6 +20,8 @@ class SuggestionTypesController < Sinatra::Base
 
   get '/:id' do
     s = SuggestionType.find(params[:id])
+    authorize! s, :readable?
+
     r = jbuilder(:'suggestion_types/_suggestion_type', locals: { s: s })
     halt 200, r
   end
@@ -30,6 +29,7 @@ class SuggestionTypesController < Sinatra::Base
   put '/:id' do
     p = params[:suggestion_type]
     s = SuggestionType.find(params[:id])
+    authorize! s, :updatable?
 
     s.name = p[:name] if p.key?(:name)
     s.description = p[:description] if p.key?(:description)
@@ -43,6 +43,8 @@ class SuggestionTypesController < Sinatra::Base
 
   delete '/:id' do
     s = SuggestionType.find(params[:id])
+    authorize! s, :deletable?
+
     s.destroy!
 
     r = jbuilder('')

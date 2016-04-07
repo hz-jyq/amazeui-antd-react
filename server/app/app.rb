@@ -1,3 +1,5 @@
+Dir["#{ALIEZ_ROOT}/app/policies/concerns/*rb"].each { |f| require f }
+Dir["#{ALIEZ_ROOT}/app/policies/*rb"].each { |f| require f }
 Dir["#{ALIEZ_ROOT}/app/models/concerns/*rb"].each { |f| require f }
 Dir["#{ALIEZ_ROOT}/app/models/*rb"].each { |f| require f }
 Dir["#{ALIEZ_ROOT}/app/controllers/concerns/*rb"].each { |f| require f }
