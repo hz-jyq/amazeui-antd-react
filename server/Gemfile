@@ -11,7 +11,7 @@ gem 'mongoid'
 gem 'aasm'
 
 # paginator
-gem 'will_paginate'
+gem 'will_paginate', require: 'will_paginate/mongoid'
 
 # generate JSON objects with a simple DSL
 gem 'jbuilder'
