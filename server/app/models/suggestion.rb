@@ -12,7 +12,7 @@ class Suggestion
 
   has_many :reviews, dependent: :destroy
   def reviewers # has_many :reviewers through: :reviews
-    User.find(reviews.pluck(:reviewer_id))
+    User.where(:id.in => reviews.pluck(:reviewer_id))
   end
 
   validates :title, presence: true

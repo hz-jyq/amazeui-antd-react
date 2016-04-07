@@ -12,7 +12,7 @@ class User
 
   has_many :reviews, dependent: :restrict
   def review_suggestions # has_many :review_suggestions through: :reviews
-    Suggestion.find(reviews.pluck(:suggestion_id))
+    Suggestion.where(:id.in => reviews.pluck(:suggestion_id))
   end
 
   validates :name, presence: true, uniqueness: true
