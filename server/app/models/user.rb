@@ -19,4 +19,8 @@ class User
   validates :role, inclusion: %i(user manager)
 
   has_secure_password
+
+  def has_role?(r)
+    role == r.to_sym
+  end
 end
