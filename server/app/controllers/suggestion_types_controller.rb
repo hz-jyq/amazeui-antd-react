@@ -2,7 +2,15 @@ class SuggestionTypesController < Sinatra::Base
   include Endpoint
 
   get '/' do
-    r = jbuilder %(json.array! SuggestionType.all, partial: 'suggestion_types/suggestion_type', as: :s)
+    authorize! SuggestionType, :listable?
+
+    r = jbuilder <<-EOT, {}, c: SuggestionType.all
+      json.array! c do |s|
+        json.(s, :id, :name, :description)
+        json.public s.public?
+        json.reviewer s.reviewers, :id, :name
+      end
+    EOT
     halt 200, r
   end
 
@@ -14,7 +22,7 @@ class SuggestionTypesController < Sinatra::Base
     s.reviewers = User.find(p[:reviewer_ids]) if p.key?(:reviewer_ids)
     s.save!
 
-    r = jbuilder(:'suggestion_types/_suggestion_type', locals: { s: s })
+    r = jbuilder(:'suggestion_types/suggestion_type', locals: { s: s })
     halt 201, r
   end
 
@@ -22,7 +30,7 @@ class SuggestionTypesController < Sinatra::Base
     s = SuggestionType.find(params[:id])
     authorize! s, :readable?
 
-    r = jbuilder(:'suggestion_types/_suggestion_type', locals: { s: s })
+    r = jbuilder(:'suggestion_types/suggestion_type', locals: { s: s })
     halt 200, r
   end
 
@@ -37,7 +45,7 @@ class SuggestionTypesController < Sinatra::Base
     s.reviewers = User.find(p[:reviewer_ids]) if p.key?(:reviewer_ids)
     s.save!
 
-    r = jbuilder(:'suggestion_types/_suggestion_type', locals: { s: s })
+    r = jbuilder(:'suggestion_types/suggestion_type', locals: { s: s })
     halt 200, r
   end
 

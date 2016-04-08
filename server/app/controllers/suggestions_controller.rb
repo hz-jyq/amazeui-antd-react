@@ -2,14 +2,23 @@ class SuggestionsController < Sinatra::Base
   include Endpoint
 
   get '/' do
-    c = case params[:filter]
+    authorize! Suggestion, :listable?
+
+    c = case params[:identifier]
         when 'submitter' then current_user.suggestions
         when 'reviewer'  then current_user.review_suggestions
         else Suggestion.publicized
         end
     c = c.page(params[:page]).per_page(params[:per_page])
 
-    r = jbuilder %(json.array! c, partial: 'suggestions/suggestion', as: :s), {}, c: c
+    r = jbuilder <<-EOT, {}, c: c
+      json.array! c do |s|
+        json.(s, :id, :title, :created_at, :state)
+        json.suggestion_type s.suggestion_type, :id, :name
+        json.submitter s.submitter, :id, :name
+        json.reviewers s.reviewers, :id, :name
+      end
+    EOT
     halt 200, r
   end
 
@@ -21,7 +30,7 @@ class SuggestionsController < Sinatra::Base
     s = current_user.suggestions.create!(p.slice(:title, :content).merge(suggestion_type: s))
     s.submit! if s.drafted?
 
-    r = jbuilder(:'suggestions/_suggestion', locals: { s: s })
+    r = jbuilder(:'suggestions/suggestion', locals: { s: s })
     halt 201, r
   end
 
@@ -29,7 +38,7 @@ class SuggestionsController < Sinatra::Base
     s = Suggestion.find(params[:id])
     authorize! s, :readable?
 
-    r = jbuilder(:'suggestions/_suggestion', locals: { s: s })
+    r = jbuilder(:'suggestions/suggestion', locals: { s: s })
     halt 200, r
   end
 end

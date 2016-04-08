@@ -10,7 +10,7 @@ RSpec.describe SuggestionsController, type: :controller do
       expect(response_body_as_json.size).to eq(4)
     end
 
-    describe 'with a filter' do
+    describe 'params: identifier' do
       before(:each) do
         create_list(:suggestion, 1, submitter: user).each { |s| s.tap(&:submit!) }
 
@@ -22,13 +22,13 @@ RSpec.describe SuggestionsController, type: :controller do
       end
 
       it 'expected show resource created by user when use :submitter' do
-        get '/suggestions?filter=submitter'
+        get '/suggestions?identifier=submitter'
         expect(response_status).to eq(200)
         expect(response_body_as_json.size).to eq(1)
       end
 
       it 'expected show resource reviewed by user when use :reviewer' do
-        get '/suggestions?filter=reviewer'
+        get '/suggestions?identifier=reviewer'
         expect(response_status).to eq(200)
         expect(response_body_as_json.size).to eq(2)
       end
@@ -65,7 +65,7 @@ RSpec.describe SuggestionsController, type: :controller do
       expect(response_status).to eq(200)
     end
 
-    context 'for unpublicized suggestion' do
+    context 'for unpublicized suggestions' do
       let(:suggestion_type) { create(:suggestion_type, public: false) }
       let(:suggestion) { create(:suggestion, suggestion_type: suggestion_type).tap(&:submit!) }
 

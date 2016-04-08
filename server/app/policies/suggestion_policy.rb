@@ -4,6 +4,10 @@ class SuggestionPolicy
     @record = record
   end
 
+  def listable?
+    true
+  end
+
   def creatable?
     true
   end

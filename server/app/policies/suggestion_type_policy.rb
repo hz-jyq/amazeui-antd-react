@@ -4,6 +4,10 @@ class SuggestionTypePolicy
     @record = record
   end
 
+  def listable?
+    true
+  end
+
   def creatable?
     @user.has_role?(:manager)
   end
