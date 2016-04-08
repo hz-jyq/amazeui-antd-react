@@ -29,7 +29,7 @@ class Suggestion
 
     event :submit, &proc { transitions from: :drafted,   to: :reviewing, success: :drafted_2_reviewing_success_hook }
     event :reject, &proc { transitions from: :reviewing, to: :rejected  }
-    event :accept, &proc { transitions from: :reviewing, to: :accepted  }
+    event :accept, &proc { transitions from: :reviewing, to: :accepted , success: :reviewing_2_accept_success_hook }
     event :award,  &proc { transitions from: :accepted,  to: :awarded   }
   end
 
@@ -44,5 +44,9 @@ class Suggestion
     s = suggestion_type
     a = s.reviewers.map { |r| { reviewer: r, suggestion: self } }
     reviews.create!(a)
+  end
+
+  def reviewing_2_accept_success_hook
+    # TODO
   end
 end
