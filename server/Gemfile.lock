@@ -86,6 +86,8 @@ GEM
     pry-byebug (3.3.0)
       byebug (~> 8.0)
       pry (~> 0.10)
+    pundit (1.1.0)
+      activesupport (>= 3.0.0)
     rack (1.6.4)
     rack-contrib (1.4.0)
       git-version-bump (~> 0.15)
@@ -166,6 +168,7 @@ DEPENDENCIES
   mongoid-rspec
   pry
   pry-byebug
+  pundit
   rack-contrib
   rack-cors
   rack-jwt

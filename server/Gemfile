@@ -25,6 +25,9 @@ gem 'toml-rb', require: 'toml'
 gem 'bcrypt'
 gem 'rack-jwt'
 
+# authorization
+gem 'pundit'
+
 # support Cross-Origin Resource Sharing
 gem 'rack-cors', group: :development
 

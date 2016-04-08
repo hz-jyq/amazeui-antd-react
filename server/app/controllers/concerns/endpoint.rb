@@ -13,13 +13,8 @@ module Endpoint
         @current_user ||= User.find(env['jwt.payload']['sub'])
       end
 
-      def authorize!(instance_or_class, action)
-        klass = instance_or_class.model_name.name.constantize
-        instance = instance_or_class.instance_of?(klass) ? instance_or_class : nil
-
-        policy = "#{klass.name}Policy".constantize
-        return if policy.new(current_user, instance).public_send(action)
-
+      def authorize!(record, query)
+        return if Pundit.policy(current_user, record).public_send(query)
         halt 403, jbuilder(%(json.error 'forbidden'))
       end
     end
