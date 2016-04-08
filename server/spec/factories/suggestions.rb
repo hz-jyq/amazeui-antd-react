@@ -4,5 +4,7 @@ FactoryGirl.define do
     content { FFaker::LoremCN.paragraph }
     association :submitter, factory: :user
     association :suggestion_type
+
+    after(:create, &:submit!)
   end
 end

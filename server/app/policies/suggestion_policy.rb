@@ -16,4 +16,8 @@ class SuggestionPolicy
     return true if @record.suggestion_type.public?
     return @record.submitter == @user || @record.reviewers.include?(@user)
   end
+
+  def reviewable?
+    @record.reviewers.include?(@user)
+  end
 end

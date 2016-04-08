@@ -11,7 +11,7 @@ class SuggestionsController < Sinatra::Base
         end
     c = c.page(params[:page]).per_page(params[:per_page])
 
-    r = jbuilder <<-EOT, {}, c: c
+    r = jbuilder <<-EOT, locals: { c: c }
       json.array! c do |s|
         json.(s, :id, :title, :created_at, :state, :score)
         json.suggestion_type s.suggestion_type, :id, :name
@@ -39,6 +39,18 @@ class SuggestionsController < Sinatra::Base
     authorize! s, :readable?
 
     r = jbuilder(:'suggestions/suggestion', locals: { s: s })
+    halt 200, r
+  end
+
+  put '/:id/review' do
+    s = Suggestion.find(params[:id])
+    authorize! s, :reviewable?
+
+    r = s.reviews.find_by(reviewer: current_user)
+    r.score = params[:score] if params.key?(:score)
+    r.save!
+
+    r = jbuilder(%(json.score r.score), locals: { r: r })
     halt 200, r
   end
 end

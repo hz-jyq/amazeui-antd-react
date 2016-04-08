@@ -12,13 +12,13 @@ RSpec.describe SuggestionsController, type: :controller do
 
     describe 'params: identifier' do
       before(:each) do
-        create_list(:suggestion, 1, submitter: user).each { |s| s.tap(&:submit!) }
+        create_list(:suggestion, 1, submitter: user)
 
         suggestion_type = create(:suggestion_type, reviewers: [user])
-        create_list(:suggestion, 2, suggestion_type: suggestion_type).each { |s| s.tap(&:submit!) }
+        create_list(:suggestion, 2, suggestion_type: suggestion_type)
 
         suggestion_type = create(:suggestion_type, public: false)
-        create_list(:suggestion, 4, suggestion_type: suggestion_type).each { |s| s.tap(&:submit!) }
+        create_list(:suggestion, 4, suggestion_type: suggestion_type)
       end
 
       it 'expected show resource created by user when use :submitter' do
@@ -67,7 +67,7 @@ RSpec.describe SuggestionsController, type: :controller do
 
     context 'for unpublicized suggestions' do
       let(:suggestion_type) { create(:suggestion_type, public: false) }
-      let(:suggestion) { create(:suggestion, suggestion_type: suggestion_type).tap(&:submit!) }
+      let(:suggestion) { create(:suggestion, suggestion_type: suggestion_type) }
 
       it 'expected response code 200 as a submitter' do
         authorize(suggestion.submitter)
@@ -85,6 +85,15 @@ RSpec.describe SuggestionsController, type: :controller do
         get "/suggestions/#{suggestion.id}"
         expect(response_status).to eq(403)
       end
+    end
+  end
+
+  describe 'PUT /suggestions/:id/review' do
+    it 'expected response code 200' do
+      s = create(:suggestion)
+      authorize(s.reviewers.first)
+      put "/suggestions/#{s.id}/review", score: 3
+      expect(response_status).to eq(200)
     end
   end
 end

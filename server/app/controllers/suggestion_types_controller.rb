@@ -4,7 +4,7 @@ class SuggestionTypesController < Sinatra::Base
   get '/' do
     authorize! SuggestionType, :listable?
 
-    r = jbuilder <<-EOT, {}, c: SuggestionType.all
+    r = jbuilder <<-EOT, locals: { c: SuggestionType.all }
       json.array! c do |s|
         json.(s, :id, :name, :description)
         json.public s.public?
