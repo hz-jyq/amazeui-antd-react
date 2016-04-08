@@ -13,7 +13,7 @@ class SuggestionsController < Sinatra::Base
 
     r = jbuilder <<-EOT, {}, c: c
       json.array! c do |s|
-        json.(s, :id, :title, :created_at, :state)
+        json.(s, :id, :title, :created_at, :state, :score)
         json.suggestion_type s.suggestion_type, :id, :name
         json.submitter s.submitter, :id, :name
         json.reviewers s.reviewers, :id, :name

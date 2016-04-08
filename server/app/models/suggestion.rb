@@ -6,6 +6,7 @@ class Suggestion
   field :title, type: String
   field :content, type: String
   field :state, type: Symbol
+  field :score, type: Float
 
   belongs_to :suggestion_type
   belongs_to :submitter, class_name: 'User'
