@@ -1,20 +1,22 @@
+import request  from 'superagent';
+import TypeRow from './TypeRow';
+import {Router, Route, IndexRoute, browserHistory,Link} from 'react-router';
 import React, {Component} from 'react';
 import {Table,Button,Icon,ModalTrigger,Modal,EventRow,EventsTable}from 'amazeui-react';
-import request  from 'superagent';
-import {Router, Route, IndexRoute, browserHistory,Link} from 'react-router';
 
 export default class DataGrid extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             data: []
         }
     }
-    loadCommentsFromServer =function(e) {
+    loadCommentsFromServer=()=> {
+        var _this=this;
         var  strStoreDate = window.localStorage? localStorage.getItem("Authorization"): Cookie.read("Authorization");
         request.get('http://127.0.0.1:3000/suggestion_types').set("Authorization", strStoreDate).set('Content-Type', 'application/json').end(function (err, res) {
             if (res.ok) {
-                e.setState({
+                _this.setState({
                     data: res.body
                 })
             } else {
@@ -23,41 +25,13 @@ export default class DataGrid extends Component {
         });
     }
     componentDidMount() {
-        this.loadCommentsFromServer(this);
+        this.loadCommentsFromServer();
     }
     render() {
-        var  strStoreDate = window.localStorage? localStorage.getItem("Authorization"): Cookie.read("Authorization");
-        var ButtonUpdate = <Button>修改</Button>
-        var ButtonDetailed = <Button>查看</Button>
-        var EventRow = React.createClass({
-            onConfirm (e){
-                var id =this.props.event.id;
-                request.delete('http://127.0.0.1:3000/suggestion_types/'+id).set('Content-Type', 'application/json').set("Authorization",strStoreDate).end(function (err, res) {
-                    if (res.ok) {
-                        debugger;
-                        this.loadCommentsFromServer(this);
-                    } else {
-                        alert('Oh no! error ' + res.text);
-                    }
-                });
-            },
-            render: function () {
-                var event = this.props.event;
-                var modal = <Modal type="confirm" eventRow={this}>你，确定要删除这条记录吗？</Modal>;
-                var ButtonDel = <ModalTrigger modal={modal}  onConfirm={this.onConfirm}><Button >删除</Button></ModalTrigger>
-                return (
-                    <tr>
-                        <td>{event.id}</td>
-                        <td>{event.name}</td>
-                        <td>{event.description}</td>
-                        <td>{ButtonDel} {ButtonUpdate} {ButtonDetailed}</td>
-                    </tr>
-                );
-            }
-        });
+        var _this=this;
         return (
-            <div className="left dataGrid">
-                <Table>
+            <div className="left dataGrid"  >
+                <Table hover striped>
                     <thead>
                     <tr>
                         <th>编号</th>
@@ -68,7 +42,7 @@ export default class DataGrid extends Component {
                     </thead>
                     <tbody>
                     {this.state.data.map(function (event) {
-                        return (<EventRow key={event.id} event={event}/>);
+                        return (<TypeRow key={event.id}  method={this} handClick={_this.loadCommentsFromServer} event={event}/>);
                     })}
                     </tbody>
                 </Table>

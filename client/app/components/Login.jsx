@@ -3,13 +3,18 @@ import {Router, Route, IndexRoute, browserHistory,Link} from 'react-router';
 import {Slider,Input,Icon,Grid,Col,Form,Button}from 'amazeui-react';
 import request  from 'superagent';
 export default class Login extends Component {
-  render() {
+    constructor(props) {
+        super(props);
+        var  strStoreDate = window.localStorage? localStorage.getItem("Authorization"): Cookie.read("Authorization");
+        if(strStoreDate){this.props.history.replace('/login')}else{
+        }
+    }
+    render() {
       var login=(eve)=> {
-          var  form=eve.currentTarget.form;
-          var inputs=form.getElementsByTagName("input");
-          var name=inputs.name.value;
-          var pwd=inputs.pwd.value;
-          request.post(' http://172.16.155.88:3000/users/authenticate').set('Content-Type', 'application/json').send({ user: { name: name, password: pwd } }).end(function(err, res){
+          var name=this.refs.name.getValue();
+          var pwd=this.refs.pwd.getValue();
+          var _this=this;
+          request.post('http://127.0.0.1:3000/users/authenticate').set('Content-Type', 'application/json').send({ user:{ name: name, password: pwd }}).end(function(err, res){
               if (res.ok) {
                   if (window.localStorage) {
                       localStorage.setItem("Authorization", "Bearer "+res.body.token
@@ -17,16 +22,11 @@ export default class Login extends Component {
                   } else {
                       Cookie.write("Authorization", Bearer+"arrDisplay");
                   }
+                  _this.props.history.replace('/login');
               } else {alert('Oh no! error ' + res.text);
               }
           });
-
-
           //存储身份验证
-
-      }
-    var  propTypes: {
-          title: React.PropTypes.string.isRequired
       }
       var iconUser = <Icon icon="user" />;
       var iconPwd = <Icon icon="lock" />;
@@ -49,9 +49,9 @@ export default class Login extends Component {
           <Grid>
               <Col sm={8} smCentered>
                   <Form>
-                          <Input addonBefore={iconUser} placeholder="用户名"  id="name" />
-                          <Input addonBefore={iconPwd} placeholder="密码" type="password" id="pwd" />
-                      <Link to='/login'> <Button   amStyle="primary" block  onClick={login}>登录</Button></Link>
+                          <Input addonBefore={iconUser} placeholder="用户名"  ref="name" />
+                          <Input addonBefore={iconPwd} placeholder="密码" type="password" ref="pwd" />
+                         <Button   amStyle="primary" block  onClick={login}>登录</Button>
                      <p></p>
                       <Link to='/registered'> <Button   amStyle="primary" block >注册</Button></Link>
                   </Form>

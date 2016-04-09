@@ -1,5 +1,5 @@
 import React, {Component,PropTypes} from 'react';
-import {Router, Route, IndexRoute, browserHistory,IndexLink,Link} from 'react-router';
+import {Router, Route, IndexRoute, browserHistory,IndexLink,Link,DefaultRoute,hashHistory} from 'react-router';
 import {NavItem,Nav,Icon,Panel} from 'amazeui-react';
 import {render} from 'react-dom'
 import Top from './Top';
@@ -14,6 +14,8 @@ import Login from './Login';
 import Registered from './Registered';
 import MyOpinionCenter from './MyOpinionCenter';
 import AddAdvice from './AddAdvice';
+import UpdateAdvice from './UpdateAdvice';
+import ViewAdvice from './ViewAdvice';
 class Main extends Component {
   render() {
       return (
@@ -23,24 +25,24 @@ class Main extends Component {
                <Left/>
                   <div className="center">
                {this.props.children}
-                      </div>
+                     </div>
               </div>
           </div>
       )
   }
 }
 render((
-    <Router history={browserHistory}>
+    <Router history={hashHistory}>
         <Route path="/login" component={Main}>
             <Route path="/MyOpinionCenter" component={MyOpinionCenter} />
             <Route path="/MyEvaluationCenter" component={MyEvaluationCenter} />
             <Route path="/AdviceTypeCenter" component={AdviceTypeCenter} />
+            <Route path="/AdviceTypeCenter/update"   component={UpdateAdvice} />
+            <Route path="/AdviceTypeCenter/view"   component={ViewAdvice} />
             <Route path="/add" component={AddAdvice} />
-            <Route path="login" component={Footer} />
         </Route>
         <Route path="/" component={Login}></Route>
         <Route path="/registered" component={Registered}></Route>
-
     </Router>
 ), document.getElementById("main"))
 

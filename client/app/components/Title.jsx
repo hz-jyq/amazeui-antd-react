@@ -20,7 +20,10 @@ export default class Title extends Component {
                   {
                       link: '/',
                       icon: 'user',
-                      title:'注销'
+                      title:'注销',
+                      onSelect(){
+                          localStorage.removeItem("Authorization")
+                      }
                   }
               ]
           }}

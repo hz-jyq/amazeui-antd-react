@@ -15,7 +15,7 @@ export default class MyOpinionCenter extends Component {
         return (
             <div className="center">
                 <Breadcrumb/>
-                <HeadButton type="Opinion"/>
+                <HeadButton type="opinion"/>
                 <ButtonBuff/>
                 <div>
                     <DataGrid/>

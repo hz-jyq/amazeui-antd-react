@@ -28,7 +28,7 @@ export default class MenuLeft extends Component {
                 <Icon icon="home" />首页</NavItem>
                  <NavItem><Link to="/MyOpinionCenter">我的建议</Link></NavItem>
                  <NavItem ><Link to="/MyEvaluationCenter">我的评价</Link></NavItem>
-                 <NavItem ><Link to="/adviceTypeCenter">类型管理</Link></NavItem>
+                 <NavItem ><Link to="/AdviceTypeCenter">类型管理</Link></NavItem>
                  <NavItem ><Link to="/EvaluationTypeCenter">评价管理</Link></NavItem>
         </Nav>
         </div>

@@ -17,11 +17,15 @@ export default class Pwd extends Component {
             value: this.refs.field.getValue()
         });
     }
+    handBlur=()=>{
+        var value=this.refs.field.getValue();
+        this.props.callbackParent(value);
+    }
     render() {
         return (
             <div>
                 <Input
-                    value={this.state.value}  placeholder="密码"  type="password" validation={this.validate()} hasFeedback ref="field"  id="pwd" onChange={this.handleChange} /></div>
+                    value={this.state.value}  placeholder="密码"  type="password" validation={this.validate()} hasFeedback ref="field"  id="pwd" onChange={this.handleChange}  onBlur={this.handBlur}/></div>
         );
     }
 }

@@ -17,7 +17,7 @@ export default class AmazeUi extends Component {
       };
       return (
           <div>
-          <form target="_blank">
+          <form >
               类型：<Selected {...props} />
               <Button type="submit">筛选</Button>
           </form>
