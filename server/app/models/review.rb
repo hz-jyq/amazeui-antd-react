@@ -6,8 +6,8 @@ class Review
 
   field :score, type: Float
 
-  belongs_to :reviewer, class_name: 'User'
-  belongs_to :suggestion
+  belongs_to :reviewer, class_name: 'User', inverse_of: :reviews
+  belongs_to :suggestion, inverse_of: :reviews
 
   validates :reviewer, presence: true
   validates :suggestion, presence: true

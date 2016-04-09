@@ -4,7 +4,6 @@ class Award
 
   field :awarded, type: Boolean, default: false
 
-  belongs_to :holder, class_name: 'User'
-  belongs_to :presenter, class_name: 'User'
-  belongs_to :suggestion
+  belongs_to :holder, class_name: 'User', inverse_of: :awards
+  belongs_to :presenter, class_name: 'User', inverse_of: :award_awards
 end

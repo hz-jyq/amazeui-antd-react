@@ -47,7 +47,7 @@ RSpec.describe SuggestionsController, type: :controller do
       post '/suggestions', suggestion: { suggestion_type_id: s.id, title: 'TITLE', content: 'CONTENT' }
       expect(response_status).to eq(201)
 
-      keys = %w(id title content created_at state suggestion_type submitter reviewers)
+      keys = %w(id title content created_at state score suggestion_type submitter reviewers)
       keys.each { |key| expect(response_body_as_json).to have_key(key) }
       expect(response_body_as_json['title']).to eq('TITLE')
       expect(response_body_as_json['content']).to eq('CONTENT')
