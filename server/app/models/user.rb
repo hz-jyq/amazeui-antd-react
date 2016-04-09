@@ -15,6 +15,9 @@ class User
     Suggestion.where(:id.in => reviews.pluck(:suggestion_id))
   end
 
+  has_many :awards, inverse_of: :holder
+  has_many :award_awards, class_name: 'Award', inverse_of: :presenter
+
   validates :name, presence: true, uniqueness: true
   validates :role, inclusion: %i(user manager)
 
