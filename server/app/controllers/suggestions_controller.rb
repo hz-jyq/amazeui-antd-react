@@ -43,9 +43,11 @@ class SuggestionsController < Sinatra::Base
   end
 
   put '/:id/my-review' do
-    r = Suggestion.find(params[:id]).reviews.find_by(reviewer: current_user)
+    s = Suggestion.find(params[:id])
+    r = s.reviews.find_by(reviewer: current_user)
     r.score = params[:score] if params.key?(:score)
     r.save!
+    s.reviewing!
 
     r = jbuilder <<-EOT, locals: { r: r }
       json.(r, :id, :score)
