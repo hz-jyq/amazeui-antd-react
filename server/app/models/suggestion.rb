@@ -3,7 +3,7 @@ class Suggestion
   include Mongoid::Timestamps
   include AASM
 
-  SCORE_MIN_VALUE = 0
+  SCORE_MIN_VALUE = 1
   SCORE_MAX_VALUE = 5
   SCORE_ACCEPTED_VALUE = 3
 
@@ -51,7 +51,7 @@ class Suggestion
     return unless reviews.all? { |r| r.score.present? }
 
     update_attributes!(score: reviews.map(&:score).reduce(&:+).fdiv(reviews.size))
-    score >= SCORE_ACCEPTED_VALUE ? accept! : reject!
+    score > SCORE_ACCEPTED_VALUE ? accept! : reject!
   end
 
   private
