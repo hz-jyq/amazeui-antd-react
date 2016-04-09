@@ -8,7 +8,7 @@ class SuggestionTypesController < Sinatra::Base
       json.array! c do |s|
         json.(s, :id, :name, :description)
         json.public s.public?
-        json.reviewer s.reviewers, :id, :name
+        json.reviewers s.reviewers, :id, :name
       end
     EOT
     halt 200, r

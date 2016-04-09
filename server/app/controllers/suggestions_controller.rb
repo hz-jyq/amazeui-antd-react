@@ -42,29 +42,14 @@ class SuggestionsController < Sinatra::Base
     halt 200, r
   end
 
-  get '/:id/review' do
-    s = Suggestion.find(params[:id])
-    authorize! s, :reviewable?
-
-    c = s.reviews
-    r = jbuilder <<-EOT, locals: { c: c }
-      json.array! c do |s|
-        json.(s, :score)
-        json.reviewer s.reviewer, :id, :name
-      end
-    EOT
-    halt 200, r
-  end
-
-  put '/:id/review' do
-    s = Suggestion.find(params[:id])
-    authorize! s, :reviewable?
-
-    r = s.reviews.find_by(reviewer: current_user)
+  put '/:id/my-review' do
+    r = Suggestion.find(params[:id]).reviews.find_by(reviewer: current_user)
     r.score = params[:score] if params.key?(:score)
     r.save!
 
-    r = jbuilder('')
-    halt 204, r
+    r = jbuilder <<-EOT, locals: { r: r }
+      json.(r, :id, :score)
+    EOT
+    halt 200, r
   end
 end

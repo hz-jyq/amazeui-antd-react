@@ -88,11 +88,11 @@ RSpec.describe SuggestionsController, type: :controller do
     end
   end
 
-  describe 'PUT /suggestions/:id/review' do
+  describe 'PUT /suggestions/:id/my-review' do
     it 'expected response code 200' do
       s = create(:suggestion)
       authorize(s.reviewers.first)
-      put "/suggestions/#{s.id}/review", score: 3
+      put "/suggestions/#{s.id}/my-review", score: 3
       expect(response_status).to eq(200)
     end
   end
