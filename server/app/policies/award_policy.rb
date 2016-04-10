@@ -7,4 +7,8 @@ class AwardPolicy
   def listable?
     true
   end
+
+  def updatable?
+    @record.presenter == @user
+  end
 end

@@ -20,6 +20,8 @@ class Suggestion
     User.where(:id.in => reviews.pluck(:reviewer_id))
   end
 
+  has_many :awards, inverse_of: :suggestion
+
   validates :title, presence: true
   validates :content, presence: true
   validates :submitter, presence: true
@@ -52,6 +54,13 @@ class Suggestion
 
     update_attributes!(score: reviews.map(&:score).reduce(&:+).fdiv(reviews.size))
     score > SCORE_ACCEPTED_VALUE ? accept! : reject!
+  end
+
+  def awarding!
+    return unless accepted?
+    return unless awards.all? { |a| a.awarded }
+
+    award!
   end
 
   private

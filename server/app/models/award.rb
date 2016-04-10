@@ -6,4 +6,5 @@ class Award
 
   belongs_to :holder, class_name: 'User', inverse_of: :awards
   belongs_to :presenter, class_name: 'User', inverse_of: :award_awards
+  belongs_to :suggestion, inverse_of: :awards
 end

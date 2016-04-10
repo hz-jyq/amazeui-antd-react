@@ -42,10 +42,11 @@ class SuggestionsController < Sinatra::Base
     halt 200, r
   end
 
-  put '/:id/my-review' do
+  put '/:id/my-review/score' do
     s = Suggestion.find(params[:id])
+
     r = s.reviews.find_by(reviewer: current_user)
-    r.score = params[:score] if params.key?(:score)
+    r.score = params.fetch(:score)
     r.save!
     s.reviewing!
 

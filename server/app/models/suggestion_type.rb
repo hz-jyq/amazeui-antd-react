@@ -7,7 +7,7 @@ class SuggestionType
   field :visibility, type: Symbol, default: :public
 
   has_many :suggestions, inverse_of: :suggestion_type, dependent: :restrict
-  has_and_belongs_to_many :reviewers, inverse_of: :suggestion_types, class_name: 'User'
+  has_and_belongs_to_many :reviewers, class_name: 'User', inverse_of: :suggestion_types
 
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true, allow_blank: true
