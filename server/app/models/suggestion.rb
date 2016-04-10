@@ -3,9 +3,16 @@ class Suggestion
   include Mongoid::Timestamps
   include AASM
 
-  SCORE_MIN_VALUE = 1
-  SCORE_MAX_VALUE = 5
-  SCORE_ACCEPTED_VALUE = 3
+  SCORE_MIN_VALUE = 1.0
+  SCORE_MAX_VALUE = 5.0
+  SCORE_ACCEPTED_VALUE = 3.0
+  SCORE_ACCEPTED_LEVEL = {
+    1 => Range.new(3.0, 3.5, true), # [3.0, 3.5)
+    2 => Range.new(3.5, 4.0, true), # [3.5, 4.0)
+    3 => Range.new(4.0, 4.5, true), # [4.0, 4.5)
+    4 => Range.new(4.5, 5.0, true), # [4.5, 5.0)
+    5 => Range.new(5.0, 5.0)        # [5.0, 5.0]
+  }.freeze
 
   field :title, type: String
   field :content, type: String
@@ -53,12 +60,12 @@ class Suggestion
     return unless reviews.all? { |r| r.score.present? }
 
     update_attributes!(score: reviews.map(&:score).reduce(&:+).fdiv(reviews.size))
-    score > SCORE_ACCEPTED_VALUE ? accept! : reject!
+    score >= SCORE_ACCEPTED_VALUE ? accept! : reject!
   end
 
   def awarding!
     return unless accepted?
-    return unless awards.all? { |a| a.awarded }
+    return unless awards.all?(&:awarded)
 
     award!
   end

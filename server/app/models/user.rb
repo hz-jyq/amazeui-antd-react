@@ -17,6 +17,7 @@ class User
 
   has_many :awards, inverse_of: :holder, dependent: :restrict
   has_many :award_awards, class_name: 'Award', inverse_of: :presenter, dependent: :restrict
+  has_many :award_rules, inverse_of: :presenter, dependent: :restrict
 
   validates :name, presence: true, uniqueness: true
   validates :role, inclusion: %i(user manager)
