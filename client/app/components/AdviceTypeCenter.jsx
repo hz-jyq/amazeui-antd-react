@@ -15,7 +15,7 @@ export default class AdviceTypeCenter extends Component {
     return (
          <div className="center" >
                 <Breadcrumb/>
-                <HeadButton type="advice"/>
+                <HeadButton router="addAdviceType"/>
                <ButtonBuff/>
                 <DataGrid/>
                 <Pagtion/>

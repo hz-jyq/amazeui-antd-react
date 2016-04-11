@@ -1,5 +1,5 @@
 import React, {Component,PropTypes} from 'react';
-import {Router, Route, IndexRoute, browserHistory,IndexLink,Link,DefaultRoute,hashHistory} from 'react-router';
+import {Router, Route, IndexRoute, browserHistory,IndexLink,Link,hashHistory,RoutingContext} from 'react-router';
 import {NavItem,Nav,Icon,Panel} from 'amazeui-react';
 import {render} from 'react-dom'
 import Top from './Top';
@@ -12,10 +12,11 @@ import Footer from './FooterBuff';
 import HeadButton from './HeadButton';
 import Login from './Login';
 import Registered from './Registered';
-import MyOpinionCenter from './MyOpinionCenter';
-import AddAdvice from './AddAdvice';
+import MyOpinionCenter from './OpinionCenter';
+import AddAdvice from './AddAdviceType';
 import UpdateAdvice from './UpdateAdvice';
 import ViewAdvice from './ViewAdvice';
+import AddOpinion from './AddOpinion';
 class Main extends Component {
   render() {
       return (
@@ -39,7 +40,8 @@ render((
             <Route path="/AdviceTypeCenter" component={AdviceTypeCenter} />
             <Route path="/AdviceTypeCenter/update"   component={UpdateAdvice} />
             <Route path="/AdviceTypeCenter/view"   component={ViewAdvice} />
-            <Route path="/add" component={AddAdvice} />
+            <Route path="/addAdviceType" component={AddAdvice} />
+            <Route path="/addOpinion" component={AddOpinion} />
         </Route>
         <Route path="/" component={Login}></Route>
         <Route path="/registered" component={Registered}></Route>

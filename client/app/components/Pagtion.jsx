@@ -21,12 +21,12 @@ export default class Pagtion extends Component {
       pages: [
         {
           title: '1',
-          link: '#1'
+          link: '#1',
+        active: true
         },
         {
           title: '2',
           link: '#2',
-          active: true
         },
         {
           title: '3',

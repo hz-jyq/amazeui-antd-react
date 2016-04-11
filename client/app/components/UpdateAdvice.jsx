@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Piece from './Piece';
 import Logo from './Logo';
 import Breadcrumb from './BreadcrumbCenter'
-import {Slider,Input,Icon,Grid,Col,Form,Button,Panel,FormGroup,UCheck,fieldset,ButtonToolbar,Selected}from 'amazeui-react';
+import {Slider,Input,Icon,Grid,Col,Form,Button,Panel,FormGroup,UCheck,fieldset,ButtonToolbar,Selected,Modal,ModalTrigger}from 'amazeui-react';
 import {Router, Route, IndexRoute, browserHistory,Link} from 'react-router';
 import request  from 'superagent';
 export default class UpdateAdvice extends Component {
@@ -16,7 +16,7 @@ export default class UpdateAdvice extends Component {
             public:true,
             reviewers:[],
             strStoreDate : window.localStorage? localStorage.getItem("Authorization"): Cookie.read("Authorization")
-        }
+        };
         this.getName=this.getName.bind(this);
     };
     //类型名字
@@ -30,22 +30,27 @@ export default class UpdateAdvice extends Component {
         this.setState({
             description :e.target.value
         });
-    }
+    };
     //公共
     public=(e)=>{
-        var flag = !!(e.target.value == 'true');
+        var flag = (e.target.value == 'true');
         this.setState({
             public :flag
         });
-    }
+    };
     //提交
     onSubmit=(e)=>{
+        var _this=this;
         var json={};
        json["name"]=this.refs.name.getValue()
         json["description"]=this.refs.description.getValue();
         json["reviewer_ids"]=this.refs.select.getValue().split(',');
+        json["public"]=this.state.public;
         request.put(`http://127.0.0.1:3000/suggestion_types/${this.props.location.query.id}`).send({"suggestion_type":json}).set("Authorization", this.state.strStoreDate).set('Content-Type', 'application/json').end(function (err, res) {
             if (res.ok) {
+
+                _this.props.history.replace('/AdviceTypeCenter');
+
 
             } else {
                 alert('Oh no! error ' + res.text);
@@ -89,37 +94,47 @@ export default class UpdateAdvice extends Component {
         this.loadCommentsFromServer(this);
     }
 
-  render() {
+
+    render() {
       var props = {
-         // value:this.state.reviewers.map(((item)=>{return item.id})).join(","),
           name:"selected",
           onChange: function(value) {
-              //document.querySelectorAll("#reviewList")[0].value=this.value;
+              document.querySelectorAll("#reviewList")[0].value=value;
           },
           data:this.state.selectData,
           multiple: true,
           maxHeight: 150,
           searchBox: true
       };
+
+        const Jyq = (
+            <Modal title="Amaze UI Modal">
+                通过ModalTrigger的props打开Modal
+            </Modal>);
       return (
     <div  >
         <Breadcrumb/>
         <Grid>
             <Col sm={11}>
+                <ModalTrigger modal={Jyq} show={false}  ref="modal" onConfirm={this.onConfirm}><Button >删除</Button></ModalTrigger>
                  <Form horizontal onSubmit={this.onSubmit.bind(this)}>
                   <Input type="textarea" label="类型名称：" labelClassName="am-u-sm-1"  wrapperClassName="am-u-sm-8" value={this.state.name}   ref="name" onChange={this.getName} id="name"/>
                    <Input type="textarea" label="描述：" labelClassName="am-u-sm-1" wrapperClassName="am-u-sm-8"  value={this.state.description}  ref="description" onChange={this.description} id="description"/>
                   <div>
                       <label  className="am-u-sm-1 am-form-label">评审人：</label> <Selected {...props}   ref="select"   />
-                      <Input  label="选中列表："  type="textarea"  labelClassName="am-u-sm-1" wrapperClassName="am-u-sm-8" readOnly  value={this.state.reviewers.map(((item)=>{return item.id}))}   id="reviewList" ></Input>
+                      <Input  label="选中列表："  type="textarea"  labelClassName="am-u-sm-1" wrapperClassName="am-u-sm-8"  readOnly  value={this.state.reviewers.map(((item)=>{return item.id}))}   id="reviewList" ></Input>
                       <label  className="am-u-sm-1 am-form-label">是否公开：</label>
-                     <Input type="radio" name="doc-radio-2" label="是"  inline checked={this.state.public}  onChange={this.public} value="true" />:<Input type="radio" name="doc-radio-2" label="否" inline onChange={this.public} value="false" checked={!this.state.public}/>
+                     <Input type="radio" name="doc-radio-2" label="是"  inline checked={this.state.public} ref="public" onChange={this.public} value="true" />:<Input type="radio" name="doc-radio-2" label="否"  rel="public"  inline onChange={this.public} value="false" checked={!this.state.public}/>
                   </div>
                    <Input type="submit" amStyle="primary" value="修改" wrapperClassName="am-u-sm-offset-1 am-u-sm-1"  />
                 </Form>
             </Col>
         </Grid>
+        <div>
+
+        </div>
     </div>
+
     );
   }
 }
