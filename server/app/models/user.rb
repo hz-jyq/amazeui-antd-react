@@ -19,7 +19,7 @@ class User
   has_many :award_awards, class_name: 'Award', inverse_of: :presenter, dependent: :restrict
   has_many :award_rules, inverse_of: :presenter, dependent: :restrict
 
-  index({ name: 1 }, unique: true)
+  index({ name: 1 }, unique: true, background: true)
 
   validates :name, presence: true, uniqueness: true
   validates :role, inclusion: %i(user manager)
