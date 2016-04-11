@@ -19,8 +19,8 @@ class Suggestion
   field :state, type: Symbol
   field :score, type: Float
 
-  belongs_to :suggestion_type, inverse_of: :suggestions
-  belongs_to :submitter, class_name: 'User', inverse_of: :suggestions
+  belongs_to :suggestion_type, inverse_of: :suggestions, index: true
+  belongs_to :submitter, class_name: 'User', inverse_of: :suggestions, index: true
 
   has_many :reviews, inverse_of: :suggestion, dependent: :destroy
   def reviewers # has_many :reviewers through: :reviews

@@ -5,9 +5,9 @@ class Award
   field :action, type: String
   field :awarded, type: Boolean, default: false
 
-  belongs_to :holder, class_name: 'User', inverse_of: :awards
-  belongs_to :presenter, class_name: 'User', inverse_of: :award_awards
-  belongs_to :suggestion, inverse_of: :awards
+  belongs_to :holder, class_name: 'User', inverse_of: :awards, index: true
+  belongs_to :presenter, class_name: 'User', inverse_of: :award_awards, index: true
+  belongs_to :suggestion, inverse_of: :awards, index: true
 
   validates :action, presence: true
   validates :awarded, inclusion: [true, false]
