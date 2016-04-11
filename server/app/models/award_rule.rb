@@ -1,3 +1,5 @@
+require_relative './suggestion'
+
 class AwardRule
   include Mongoid::Document
   include Mongoid::Timestamps

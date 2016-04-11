@@ -79,6 +79,9 @@ class Suggestion
   end
 
   def reviewing_2_accept_success_hook
-    # TODO
+    l, _r = SCORE_ACCEPTED_LEVEL.find { |_, range| range.include?(score) }
+    rules = AwardRule.where(score_accepted_level: l)
+    a = rules.map { |r| { action: r.action, presenter: r.presenter, holder: submitter, suggestion: self } }
+    a.empty? ? awarding! : awards.create!(a)
   end
 end
