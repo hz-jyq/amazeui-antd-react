@@ -31,6 +31,9 @@ gem 'pundit'
 # contributed Rack middleware: Rack::PostBodyContentTypeParser, etc.
 gem 'rack-contrib'
 
+# load environment variables from .env
+gem 'dotenv'
+
 # project requirements
 gem 'rake', require: false
 
