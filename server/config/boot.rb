@@ -10,6 +10,8 @@ Bundler.require(:default, RACK_ENV)
 # Global settings
 Sinatra::Base.set(:environment, RACK_ENV.to_sym)
 Sinatra::Base.set(:views, File.join(ALIEZ_ROOT, 'app', 'views'))
+Sinatra::Base.set(:show_exceptions, false)
+Sinatra::Base.set(:dump_errors, false)
 
 # Read configuration files
 file = File.join(ALIEZ_ROOT, 'config', "#{Sinatra::Base.environment}.toml")

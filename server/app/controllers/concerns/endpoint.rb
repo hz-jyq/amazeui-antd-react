@@ -18,5 +18,9 @@ module Endpoint
         halt 403, jbuilder(%(json.error 'forbidden'))
       end
     end
+
+    error do
+      jbuilder(%(json.error '#{env['sinatra.error'].message}'))
+    end
   end
 end
