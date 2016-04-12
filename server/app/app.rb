@@ -8,7 +8,7 @@ Dir["#{ALIEZ_ROOT}/app/controllers/*rb"].each { |f| require f }
 class App
   class UnknownRouteHandler
     def call(_env)
-      [404, { 'Content-Type' => 'application/json' }, ['Not Found'.freeze]]
+      [404, { 'Content-Type' => 'application/json' }, [{ error: 'Not Found' }.to_json]]
     end
   end
 
