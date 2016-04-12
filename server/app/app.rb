@@ -24,6 +24,8 @@ class App
       controllers.each do |controller|
         map(controller.route_url) { run(controller.new) }
       end
+
+      run ->(_env) { [404, { 'Content-Type' => 'application/json' }, ['Not Found'.freeze]] }
     end
   end
 
