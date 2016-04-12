@@ -10,7 +10,7 @@ Bundler.require(:default, RACK_ENV)
 # Load environment variables from .env
 Dotenv.load
 envs = %w(MONGOID_HOST MONGOID_PORT SESSION_SECRET) if Sinatra::Base.production?
-envs.each do |env|
+envs&.each do |env|
   next if ENV.key?(env)
   puts "environment variable '#{env}' is missing."
   exit 1
