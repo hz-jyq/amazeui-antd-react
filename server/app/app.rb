@@ -8,15 +8,6 @@ Dir["#{ALIEZ_ROOT}/app/controllers/*rb"].each { |f| require f }
 class App
   def initialize
     @app = Rack::Builder.app do
-      if Sinatra::Base.development?
-        use Rack::Cors do
-          allow do
-            origins '*'
-            resource '*', headers: :any, methods: :any
-          end
-        end
-      end
-
       use Rack::PostBodyContentTypeParser
       use Rack::JWT::Auth, secret: Settings[:session][:secret], exclude: ['/users/authenticate']
 
