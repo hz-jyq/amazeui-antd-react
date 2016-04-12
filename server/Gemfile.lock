@@ -92,7 +92,6 @@ GEM
     rack-contrib (1.4.0)
       git-version-bump (~> 0.15)
       rack (~> 1.4)
-    rack-cors (0.4.0)
     rack-jwt (0.3.0)
       jwt (~> 1.5.2)
       rack (>= 1.6.0)
@@ -170,7 +169,6 @@ DEPENDENCIES
   pry-byebug
   pundit
   rack-contrib
-  rack-cors
   rack-jwt
   rack-test
   rake
