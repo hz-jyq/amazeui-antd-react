@@ -13,6 +13,14 @@ Sinatra::Base.set(:views, File.join(ALIEZ_ROOT, 'app', 'views'))
 Sinatra::Base.set(:show_exceptions, false)
 Sinatra::Base.set(:dump_errors, false)
 
+# Global settings - Custom Logger
+if Sinatra::Base.development?
+  Sinatra::Base.set(:logger, Logger.new(STDOUT))
+else
+  file = File.join(ALIEZ_ROOT, 'log', "#{Sinatra::Base.environment}.log")
+  Sinatra::Base.set(:logger, Logger.new(file, 4, 256 * 1024 * 1024))
+end
+
 # Read configuration files
 file = File.join(ALIEZ_ROOT, 'config', "#{Sinatra::Base.environment}.toml")
 Settings = ActiveSupport::HashWithIndifferentAccess.new(TOML.parse(ERB.new(File.read(file)).result))
