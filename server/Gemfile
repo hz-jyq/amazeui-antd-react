@@ -28,6 +28,9 @@ gem 'rack-jwt'
 # authorization
 gem 'pundit'
 
+# support Cross-Origin Resource Sharing
+gem 'rack-cors', group: :development
+
 # contributed Rack middleware: Rack::PostBodyContentTypeParser, etc.
 gem 'rack-contrib'
 
