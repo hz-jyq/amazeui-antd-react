@@ -2,6 +2,7 @@ require: rubocop-rspec
 
 
 AllCops:
+  TargetRubyVersion: 2.3
   Exclude:
     - 'bin/*'
 
@@ -20,6 +21,9 @@ Style/Documentation:
   Enabled: false
 
 Style/ExtraSpacing:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
   Enabled: false
 
 Style/LambdaCall:

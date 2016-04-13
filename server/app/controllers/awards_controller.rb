@@ -13,7 +13,7 @@ class AwardsController < Sinatra::Base
 
     r = jbuilder <<-EOT, locals: { c: c }
       json.array! c do |s|
-        json.(s, :id, :awarded)
+        json.(s, :id, :action, :awarded)
         json.holder s.holder, :id, :name
         json.presenter s.presenter, :id, :name
       end

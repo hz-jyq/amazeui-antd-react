@@ -1,6 +1,13 @@
+/log
+/tmp
+
 # Environment normalization:
 /.bundle
 /vendor/bundle
+
+# Ignore Dotenv files
+.env
+.env.*
 
 # Ignore Byebug command history file.
 .byebug_history

@@ -25,7 +25,7 @@ RSpec.describe SuggestionTypesController, type: :controller do
 
   describe 'GET /suggestion_types/:id' do
     it 'expected response code 200' do
-      s = create(:suggestion_type, name: '创新建议')
+      s = create(:suggestion_type)
       get "/suggestion_types/#{s.id}"
       expect(response_status).to eq(200)
     end

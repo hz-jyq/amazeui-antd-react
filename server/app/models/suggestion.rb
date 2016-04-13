@@ -19,8 +19,8 @@ class Suggestion
   field :state, type: Symbol
   field :score, type: Float
 
-  belongs_to :suggestion_type, inverse_of: :suggestions
-  belongs_to :submitter, class_name: 'User', inverse_of: :suggestions
+  belongs_to :suggestion_type, inverse_of: :suggestions, index: true
+  belongs_to :submitter, class_name: 'User', inverse_of: :suggestions, index: true
 
   has_many :reviews, inverse_of: :suggestion, dependent: :destroy
   def reviewers # has_many :reviewers through: :reviews
@@ -79,6 +79,9 @@ class Suggestion
   end
 
   def reviewing_2_accept_success_hook
-    # TODO
+    l, _r = SCORE_ACCEPTED_LEVEL.find { |_, range| range.include?(score) }
+    rules = AwardRule.where(score_accepted_level: l)
+    a = rules.map { |r| { action: r.action, presenter: r.presenter, holder: submitter, suggestion: self } }
+    a.empty? ? awarding! : awards.create!(a)
   end
 end
