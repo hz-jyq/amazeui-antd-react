@@ -27,7 +27,8 @@ export default class MenuLeft extends Component {
             <NavItem href="http://www.amazeui.org">
                 <Icon icon="home" />首页</NavItem>
                  <NavItem><Link to="/MyOpinionCenter">我提出的</Link></NavItem>
-                 <NavItem ><Link to="/MyEvaluationCenter">我的评价</Link></NavItem>
+                 <NavItem ><Link to="/MyEvaluationCenter">我评价的</Link></NavItem>
+                <NavItem ><Link to="/EvaluationTypeCenter">待我奖励</Link></NavItem>
                  <NavItem ><Link to="/AdviceTypeCenter">类型管理</Link></NavItem>
                  <NavItem ><Link to="/EvaluationTypeCenter">评价管理</Link></NavItem>
         </Nav>

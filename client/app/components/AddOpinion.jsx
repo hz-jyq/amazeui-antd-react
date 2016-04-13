@@ -65,21 +65,35 @@ export default class AddAdviceType extends Component {
       },
       multiple: true,
       maxHeight: 150,
-      searchBox: true
+      searchBox: true,
+      label:"111"
     };
     var myFilter = function(filterText, option) {
       return (option.value === "one");
     };
+    var data = [
+      {value: 'one', label: 'One'},
+      {value: 'two', label: 'Two'},
+      {value: 'three', label: 'Three'}
+    ];
+    var props = {
+      data: data,
+      onChange: function(value) {
+        console.log('当前值为：', value);
+      }
+    }
     return (
         <div  >
           <Breadcrumb/>
           <Grid>
             <Col sm={11}>
               <Form horizontal onSubmit={this.onSubmit}>
-                <Input type="textarea" label="类型名称：" labelClassName="am-u-sm-1"  wrapperClassName="am-u-sm-8" ref="name" id="name"  />
+                <ButtonToolbar>
+                  <label  className="am-u-sm-1 am-form-label">类型：</label><Selected {...props}  />
+                </ButtonToolbar>
                 <Input type="textarea" label="标题：" labelClassName="am-u-sm-1" wrapperClassName="am-u-sm-8" ref="description" />
-                <Input type="textarea" label="内容：" labelClassName="am-u-sm-1" wrapperClassName="am-u-sm-8" ref="description" />
-                <spn>  <Input type="submit" amStyle="primary" value="保存"  wrapperClassName="am-u-sm-offset-1 am-u-sm-1"  /></spn>
+                <Input type="textarea" label="内容：" labelClassName="am-u-sm-1" rows="5" wrapperClassName="am-u-sm-8" ref="description" />
+                <spn>  <Input type="submit" amStyle="primary" value="提交"  wrapperClassName="am-u-sm-offset-1 am-u-sm-1"  /></spn>
               </Form>
             </Col>
           </Grid>

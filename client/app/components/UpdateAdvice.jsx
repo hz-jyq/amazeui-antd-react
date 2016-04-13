@@ -93,8 +93,6 @@ export default class UpdateAdvice extends Component {
     componentDidMount() {
         this.loadCommentsFromServer(this);
     }
-
-
     render() {
       var props = {
           name:"selected",
@@ -116,7 +114,6 @@ export default class UpdateAdvice extends Component {
         <Breadcrumb/>
         <Grid>
             <Col sm={11}>
-                <ModalTrigger modal={Jyq} show={false}  ref="modal" onConfirm={this.onConfirm}><Button >删除</Button></ModalTrigger>
                  <Form horizontal onSubmit={this.onSubmit.bind(this)}>
                   <Input type="textarea" label="类型名称：" labelClassName="am-u-sm-1"  wrapperClassName="am-u-sm-8" value={this.state.name}   ref="name" onChange={this.getName} id="name"/>
                    <Input type="textarea" label="描述：" labelClassName="am-u-sm-1" wrapperClassName="am-u-sm-8"  value={this.state.description}  ref="description" onChange={this.description} id="description"/>
@@ -131,7 +128,6 @@ export default class UpdateAdvice extends Component {
             </Col>
         </Grid>
         <div>
-
         </div>
     </div>
 

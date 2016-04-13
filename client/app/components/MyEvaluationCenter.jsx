@@ -15,7 +15,7 @@ export default class MyEvaluationCenter extends Component {
         return (
             <div>
                 <Breadcrumb/>
-                <HeadButton/>
+                <HeadButton router="addEvaluation"/>
                 <ButtonBuff/>
                 <div>
                     <DataGrid/>

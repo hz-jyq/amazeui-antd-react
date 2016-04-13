@@ -14,7 +14,7 @@ export default class OpinionDataGrid extends Component {
     loadCommentsFromServer=()=> {
         var _this=this;
         var  strStoreDate = window.localStorage? localStorage.getItem("Authorization"): Cookie.read("Authorization");
-        request.get('http://127.0.0.1:3000/suggestion_types').set("Authorization", strStoreDate).set('Content-Type', 'application/json').end(function (err, res) {
+        request.get('http://127.0.0.1:3000/suggestion').set("Authorization", strStoreDate).set('Content-Type', 'application/json').end(function (err, res) {
             if (res.ok) {
                 _this.setState({
                     data: res.body

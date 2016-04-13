@@ -42,6 +42,7 @@ render((
             <Route path="/AdviceTypeCenter/view"   component={ViewAdvice} />
             <Route path="/addAdviceType" component={AddAdvice} />
             <Route path="/addOpinion" component={AddOpinion} />
+            <Route path="/addEvaluation" component={AddAdvice} />
         </Route>
         <Route path="/" component={Login}></Route>
         <Route path="/registered" component={Registered}></Route>
