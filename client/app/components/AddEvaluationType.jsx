@@ -6,7 +6,7 @@ import {Slider,Input,Icon,Grid,Col,Form,Button,Panel,FormGroup,UCheck,fieldset,B
 import request  from 'superagent';
 import {Router, Route, IndexRoute, browserHistory,Link} from 'react-router';
 import Rating,{PercentageSymbol} from 'react-rating';
-export default class AddAdvice extends Component {
+export default class AddEvaluationType extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -43,8 +43,8 @@ export default class AddAdvice extends Component {
         var json={};
         json["name"]=this.refs.name.getValue()
         json["description"]=this.refs.description.getValue();
+        json["rat"]= this.refs.rat.state.index;
         json["reviewer_ids"]=this.refs.select.getValue().split(',');
-        json["public"]=this.state.public;
         request.post('http://127.0.0.1:3000/suggestion_types').send({"suggestion_type":json}).set("Authorization",this.state.strStoreDate).set('Content-Type', 'application/json').end(function (err, res) {
             if (res.ok) {
             } else {
@@ -113,14 +113,14 @@ export default class AddAdvice extends Component {
         <Grid>
             <Col sm={11}>
                  <Form horizontal onSubmit={this.onSubmit}>
-                  <Input type="textarea" label="类型名称：" labelClassName="am-u-sm-1"  wrapperClassName="am-u-sm-8" ref="name" id="name"  />
-                   <Input type="textarea" label="描述：" labelClassName="am-u-sm-1" wrapperClassName="am-u-sm-8" ref="description" />
-                  <div>
-                   <label  className="am-u-sm-1 am-form-label">评审人：</label> <Selected {...props}  id="review"    data={this.state.selectData}   ref="select" />
-                    <Input  label="选中列表："  type="textarea"  labelClassName="am-u-sm-1"  readOnly wrapperClassName="am-u-sm-8" id="reviewList"   ></Input>
-                      <label  className="am-u-sm-1 am-form-label">是否公开：</label>
-                      <Input type="radio" name="doc-radio-2" label="是"  inline checked={this.state.public} ref="public" onChange={this.public} value="true" />:<Input type="radio" name="doc-radio-2" label="否"  rel="public"  inline onChange={this.public} value="false" checked={!this.state.public}/>
-                  </div>
+                  <Input type="textarea" label="名称：" labelClassName="am-u-sm-1"  wrapperClassName="am-u-sm-8" ref="name" id="name"  />
+                     <Input type="textarea" label="奖励方式：" labelClassName="am-u-sm-1" rows="5" wrapperClassName="am-u-sm-8" ref="description" />
+                     <div>
+                        <label  className="am-u-sm-1 am-form-label">条件：</label> <Rating empty={empty} full={full} ref="rat" fractions={2} initialRate={5} onClick={handClick} />
+                     </div>
+                     <div>
+                        <label  className="am-u-sm-1 am-form-label">实施人：</label> <Selected {...props}  id="review"    data={this.state.selectData}   ref="select" />
+                     </div>
                     <Input type="submit" amStyle="primary" value="保存"  wrapperClassName="am-u-sm-offset-1 am-u-sm-1"  />
                 </Form>
             </Col>

@@ -17,6 +17,10 @@ import AddAdvice from './AddAdviceType';
 import UpdateAdvice from './UpdateAdvice';
 import ViewAdvice from './ViewAdvice';
 import AddOpinion from './AddOpinion';
+import EvaluationTypeCenter from './EvaluationTypeCenter';
+import addEvaluationType from './AddEvaluationType';
+
+
 class Main extends Component {
   render() {
       return (
@@ -37,12 +41,14 @@ render((
         <Route path="/login" component={Main}>
             <Route path="/MyOpinionCenter" component={MyOpinionCenter} />
             <Route path="/MyEvaluationCenter" component={MyEvaluationCenter} />
+            <Route path="/EvaluationTypeCenter" component={EvaluationTypeCenter} />
             <Route path="/AdviceTypeCenter" component={AdviceTypeCenter} />
             <Route path="/AdviceTypeCenter/update"   component={UpdateAdvice} />
             <Route path="/AdviceTypeCenter/view"   component={ViewAdvice} />
             <Route path="/addAdviceType" component={AddAdvice} />
             <Route path="/addOpinion" component={AddOpinion} />
             <Route path="/addEvaluation" component={AddAdvice} />
+            <Route path="/addEvaluationType" component={addEvaluationType} />
         </Route>
         <Route path="/" component={Login}></Route>
         <Route path="/registered" component={Registered}></Route>
