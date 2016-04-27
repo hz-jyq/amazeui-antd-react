@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 var PATHS = {
   app: path.join(__dirname, 'app'),
@@ -7,14 +8,12 @@ var PATHS = {
 }
 
 module.exports = {
-  resolve: {
-    extensions: ['', '.js', '.jsx']
-  },
   entry: {
-    app: PATHS.app
+    app: path.join(PATHS.app, 'index.jsx')
   },
   output: {
-    path: path.join(__dirname, 'build'),
+    path: PATHS.build,
+    publicPath: '/',
     filename: '[name].js'
   },
   module: {
@@ -24,4 +23,9 @@ module.exports = {
       loader: 'babel-loader'
     }]
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.join(PATHS.app, 'index.html')
+    })
+  ]
 }
