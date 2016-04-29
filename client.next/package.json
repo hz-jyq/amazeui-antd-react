@@ -15,11 +15,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "material-ui": "^0.14.4",
     "react": "^0.14.0",
+    "react-bootstrap": "^0.29.3",
     "react-dom": "^0.14.0",
     "react-router": "^2.4.0",
-    "react-tap-event-plugin": "^0.2.2",
     "superagent": "^1.8.3"
   },
   "devDependencies": {
