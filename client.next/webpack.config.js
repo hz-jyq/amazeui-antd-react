@@ -1,8 +1,7 @@
-var path = require('path')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-var PATHS = {
+const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build')
 }
@@ -27,5 +26,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(PATHS.app, 'index.html')
     })
-  ]
+  ],
+  devServer: {
+    inline: true,
+    historyApiFallback: true
+  }
 }

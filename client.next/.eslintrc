@@ -1,6 +1,10 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
+  "rules": {
+    "comma-dangle": "off",
+    "semi": "off"
+  },
   "plugins": [
     "react"
   ]
