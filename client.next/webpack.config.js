@@ -7,6 +7,9 @@ const PATHS = {
 }
 
 module.exports = {
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   entry: {
     app: path.join(PATHS.app, 'index.jsx')
   },
