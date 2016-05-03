@@ -7,7 +7,7 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import * as reducers from './reducers'
 
 
-const store = createStore(combineReducers({ ...reducers, routing: routerReducer }))
+const store = createStore(combineReducers(Object.assign({}, reducers, { routing: routerReducer })))
 const history = syncHistoryWithStore(browserHistory, store)
 const containerNode = document.getElementById('container')
 
