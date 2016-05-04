@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import Piece from './Piece';
-import Logo from './Logo';
 import {Pagination}from 'amazeui-react';
 export default class Pagtion extends Component {
 
