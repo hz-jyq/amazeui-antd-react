@@ -1,18 +1,29 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { createStore, combineReducers } from 'redux'
+import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { Router, browserHistory } from 'react-router'
+import { Router, Route, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
-import * as reducers from './reducers'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import createLogger from 'redux-logger'
+
+import * as reducers from './ducks'
+import { AppContainer } from './containers'
 
 
-const store = createStore(combineReducers(Object.assign({}, reducers, { routing: routerReducer })))
+const store = createStore(
+  combineReducers({ ...reducers, routing: routerReducer }),
+  applyMiddleware(createLogger())
+)
+
 const history = syncHistoryWithStore(browserHistory, store)
-const containerNode = document.getElementById('container')
+const routes = (
+  <Route component={AppContainer} />
+)
 
-ReactDOM.render((
+const mountDOM = document.getElementById('mountDOM')
+render(
   <Provider store={store}>
-    <Router history={history} />
-  </Provider>
-), containerNode)
+    <Router history={history} routes={routes} />
+  </Provider>,
+  mountDOM
+)
