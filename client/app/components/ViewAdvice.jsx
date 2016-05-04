@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import Piece from './Piece';
-import Logo from './Logo';
 import Breadcrumb from './BreadcrumbCenter'
 import {Slider,Input,Icon,Grid,Col,Form,Button,Panel,FormGroup,UCheck,fieldset,ButtonToolbar,Selected}from 'amazeui-react';
 import {Router, Route, IndexRoute, browserHistory,Link} from 'react-router';
