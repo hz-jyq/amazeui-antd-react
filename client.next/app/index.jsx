@@ -11,19 +11,19 @@ import { AppContainer } from './containers'
 
 
 const store = createStore(
-  combineReducers({ ...reducers, routing: routerReducer }),
+  combineReducers({ ...reducers, routing: routerReducer }), {},
   applyMiddleware(createLogger())
 )
 
 const history = syncHistoryWithStore(browserHistory, store)
 const routes = (
-  <Route component={AppContainer} />
+  <Route path="/" component={AppContainer} />
 )
 
+
 const mountDOM = document.getElementById('mountDOM')
-render(
+render((
   <Provider store={store}>
     <Router history={history} routes={routes} />
-  </Provider>,
-  mountDOM
-)
+  </Provider>
+), mountDOM)
