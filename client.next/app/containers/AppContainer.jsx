@@ -5,9 +5,13 @@ import NavBar from '../components/NavBar'
 
 
 class App extends Component {
+  componentWillMount() {
+    // TODO
+  }
+
   render() {
     return (
-      <NavBar isAuthenticated={this.props.isAuthenticated} userName={this.props.userName}/>
+      <NavBar isAuthenticated={this.props.isAuthenticated} userName={this.props.userName} />
     )
   }
 }

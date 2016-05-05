@@ -1,29 +1,30 @@
-import React, { Component, PropTypes } from 'react'
-import { Navbar as BsNavbar, Nav as BsNav, NavItem as BsNavItem, NavDropdown as BsNavDropdown } from 'react-bootstrap'
+import React, { PropTypes } from 'react'
+import { Navbar as BsNavbar, Nav as BsNav, NavDropdown as BsNavDropdown } from 'react-bootstrap'
 
 
-export default class NavBar extends Component {
-  render() {
-    return (
-      <BsNavbar>
-        <BsNavbar.Header>
-          <BsNavbar.Brand>
-            <a href="#">意见反馈系统</a>
-          </BsNavbar.Brand>
-          <BsNavbar.Toggle />
-        </BsNavbar.Header>
-        <BsNavbar.Collapse>
-          {
-            this.props.isAuthenticated
-            ? <BsNav pullRight>
-                <BsNavDropdown title={this.props.userName} id="nav-dropdown" />
-              </BsNav>
-            : ''
-          }
-        </BsNavbar.Collapse>
-      </BsNavbar>
+export default function NavBar(props) {
+  let navDropdown = ''
+  if (props.isAuthenticated) {
+    navDropdown = (
+      <BsNav pullRight>
+        <BsNavDropdown title={props.userName} id="nav-dropdown" />
+      </BsNav>
     )
   }
+
+  return (
+    <BsNavbar>
+      <BsNavbar.Header>
+        <BsNavbar.Brand>
+          <a href="#">意见反馈系统</a>
+        </BsNavbar.Brand>
+        <BsNavbar.Toggle />
+      </BsNavbar.Header>
+      <BsNavbar.Collapse>
+        {navDropdown}
+      </BsNavbar.Collapse>
+    </BsNavbar>
+  )
 }
 
 NavBar.propTypes = {
