@@ -17,12 +17,13 @@ const webpackConfig = {
     extensions: ['', '.js', '.jsx']
   },
   entry: {
-    app: config.paths.app
+    app: config.paths.app,
+    vendor: Object.keys(require('./package.json').dependencies)
   },
   output: {
     path: config.paths.dist,
     publicPath: '/',
-    filename: '[name].js'
+    filename: '[name].js',
   },
   module: {
     loaders: [{
@@ -37,11 +38,11 @@ const webpackConfig = {
         'NODE_ENV': JSON.stringify(config.env)
       }
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest']
+    }),
     new HtmlWebpackPlugin({
       template: path.join(config.paths.app, 'index.html'),
-      hash: false,
-      filename: 'index.html',
-      inject: 'body',
       minify: {
         collapseWhitespace: true
       }
@@ -53,5 +54,25 @@ const webpackConfig = {
   }
 }
 
+if (config.env === 'development') {
+  webpackConfig.plugins.push(
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  )
+}
+
+if (config.env === 'production') {
+  webpackConfig.plugins.push(
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        dead_code: true,
+        unused: true,
+        warnings: false
+      }
+    })
+  )
+}
 
 module.exports = webpackConfig
