@@ -4,9 +4,10 @@
   "description": "aliez",
   "main": "",
   "scripts": {
-    "build": "webpack",
-    "start": "webpack-dev-server",
-    "lint": "eslint --ext .js,.jsx ./app"
+    "build": "webpack --progress --profile",
+    "dev-server": "webpack-dev-server --progress",
+    "lint": "eslint --ext .js,.jsx ./app",
+    "lint:fix": "npm run lint -- --fix"
   },
   "repository": {
     "type": "git",

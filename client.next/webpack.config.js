@@ -1,33 +1,50 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const PATHS = {
-  app: path.join(__dirname, 'app'),
-  build: path.join(__dirname, 'build')
+
+const config = {
+  env: process.env.NODE_ENV || 'development',
+  paths: {
+    app: path.join(__dirname, 'app'),
+    dist: path.join(__dirname, 'dist')
+  }
 }
 
-module.exports = {
+const webpackConfig = {
   resolve: {
+    root: [config.paths.app],
     extensions: ['', '.js', '.jsx']
   },
   entry: {
-    app: path.join(PATHS.app, 'index.jsx')
+    app: config.paths.app
   },
   output: {
-    path: PATHS.build,
+    path: config.paths.dist,
     publicPath: '/',
     filename: '[name].js'
   },
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      include: PATHS.app,
+      include: config.paths.app,
       loader: 'babel-loader'
     }]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(config.env)
+      }
+    }),
     new HtmlWebpackPlugin({
-      template: path.join(PATHS.app, 'index.html')
+      template: path.join(config.paths.app, 'index.html'),
+      hash: false,
+      filename: 'index.html',
+      inject: 'body',
+      minify: {
+        collapseWhitespace: true
+      }
     })
   ],
   devServer: {
@@ -35,3 +52,6 @@ module.exports = {
     historyApiFallback: true
   }
 }
+
+
+module.exports = webpackConfig

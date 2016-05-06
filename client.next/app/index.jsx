@@ -6,8 +6,8 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import createLogger from 'redux-logger'
 
-import * as reducers from './reducers'
-import { AppContainer } from './containers'
+import * as reducers from 'reducers'
+import { AppContainer } from 'containers'
 
 
 const store = createStore(
@@ -19,7 +19,6 @@ const history = syncHistoryWithStore(browserHistory, store)
 const routes = (
   <Route path="/" component={AppContainer} />
 )
-
 
 const mountDOM = document.getElementById('mountDOM')
 render((

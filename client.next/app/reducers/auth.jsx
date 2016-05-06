@@ -1,5 +1,7 @@
 export default function reducer(state = {
-  isAuthenticated: false, userName: ''
+  isAuthenticated: false,
+  accessToken: localStorage.getItem('accessToken') || '',
+  userName: ''
 }, action) {
   switch (action.type) {
     default:
