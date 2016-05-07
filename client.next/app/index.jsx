@@ -9,6 +9,8 @@ import createLogger from 'redux-logger'
 import * as reducers from './reducers'
 import { AppContainer } from './containers'
 
+import 'antd/lib/index.css'
+
 
 const store = createStore(
   combineReducers({ ...reducers, routing: routerReducer }), {},

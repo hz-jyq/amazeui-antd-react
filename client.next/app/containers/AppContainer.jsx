@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Jumbotron, Col, Panel } from 'react-bootstrap'
-
-import GlobalNavBar from '../components/GlobalNavBar'
-import SignInForm from '../components/SignInForm'
+import { Spin } from 'antd'
 
 
 class App extends Component {
@@ -14,38 +11,8 @@ class App extends Component {
   }
 
   render() {
-    let contentDiv = ''
-    if (this.props.isAuthenticated) {
-      contentDiv = (
-        <Jumbotron>
-          <h1>您好，有什么需要帮助的吗？</h1>
-        </Jumbotron>
-      )
-    } else {
-      if (this.props.accessToken === '') {
-        contentDiv = (
-          <Col sm={4} smOffset={4}>
-            <Panel>
-              <SignInForm />
-            </Panel>
-          </Col>
-        )
-      } else {
-        // TODO
-      }
-    }
-
     return (
-      <div>
-        <GlobalNavBar
-          isAuthenticated={this.props.isAuthenticated}
-          userName={this.props.userName}
-        />
-
-        <div className="container">
-          {contentDiv}
-        </div>
-      </div>
+      <Spin size="large" />
     )
   }
 }

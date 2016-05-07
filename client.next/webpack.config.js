@@ -16,19 +16,21 @@ const webpackConfig = {
     extensions: ['', '.js', '.jsx']
   },
   entry: {
-    app: config.paths.app,
-    vendor: Object.keys(require('./package.json').dependencies)
+    app: config.paths.app
   },
   output: {
     path: config.paths.dist,
     publicPath: '/',
-    filename: '[name].js',
+    filename: '[name]-[hash].js',
   },
   module: {
     loaders: [{
-      test: /\.jsx?$/,
-      include: config.paths.app,
-      loader: 'babel-loader'
+      test: /\.(js|jsx)$/,
+      exclude: /node_modules/,
+      loader: 'babel'
+    }, {
+      test: /\.css$/,
+      loader: 'style!css'
     }]
   },
   plugins: [
@@ -36,9 +38,6 @@ const webpackConfig = {
       'process.env': {
         'NODE_ENV': JSON.stringify(config.env)
       }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest']
     }),
     new HtmlWebpackPlugin({
       template: path.join(config.paths.app, 'index.html'),
