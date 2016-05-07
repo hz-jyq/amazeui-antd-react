@@ -13,6 +13,7 @@ const config = {
 
 const webpackConfig = {
   resolve: {
+    root: config.paths.app,
     extensions: ['', '.js', '.jsx']
   },
   entry: {

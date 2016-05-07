@@ -1,4 +1,4 @@
-import AppContainer from './AppContainer'
+import AppContainer from 'containers/AppContainer'
 
 
 export {
