@@ -7,7 +7,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import createLogger from 'redux-logger'
 
 import * as reducers from 'ducks'
-import { AppContainer } from 'containers'
+import App from 'containers/App'
 
 import 'antd/lib/index.css'
 
@@ -19,7 +19,7 @@ const store = createStore(
 
 const history = syncHistoryWithStore(browserHistory, store)
 const routes = (
-  <Route path="/" component={AppContainer} />
+  <Route path="/" component={App} />
 )
 
 const mountDOM = document.getElementById('mountDOM')

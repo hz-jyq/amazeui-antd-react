@@ -3,7 +3,8 @@
   "extends": "airbnb",
   "rules": {
     "comma-dangle": "off",
-    "semi": "off"
+    "semi": "off",
+    "react/prefer-stateless-function": "off"
   },
   "plugins": [
     "react"

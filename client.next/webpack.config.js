@@ -49,7 +49,15 @@ const webpackConfig = {
   ],
   devServer: {
     inline: true,
-    historyApiFallback: true
+    historyApiFallback: true,
+    proxy: {
+      '/api/*': {
+        target: 'http://127.0.0.1:2000/',
+        rewrite: function(req) {
+          req.url = req.url.replace(/^\/api/, '')
+        }
+      }
+    }
   }
 }
 

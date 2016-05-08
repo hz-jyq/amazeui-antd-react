@@ -10,6 +10,11 @@ class UsersController < Sinatra::Base
     halt 201, jbuilder(%(json.token '#{token}'))
   end
 
+  post '/reauthenticate' do
+    token = Rack::JWT::Token.encode({ sub: current_user.id }, Settings[:session][:secret])
+    halt 201, jbuilder(%(json.token '#{token}'))
+  end
+
   get '/' do
     halt 200, jbuilder(%(json.array! User.all, :id, :name))
   end

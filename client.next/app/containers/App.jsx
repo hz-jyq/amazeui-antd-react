@@ -1,24 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import SignInContainer from 'containers/SignInContainer'
+import SignIn from 'containers/SignIn'
 
 
 class App extends Component {
-  ComponentDidMount() {
-    //
-  }
-
   render() {
     let contentDiv = null
     if (this.props.isAuthenticated) {
-      contentDiv = (
-        <p>HOME PAGE</p>
-      )
+      contentDiv = <p>HOME PAGE</p>
     } else {
-      contentDiv = (
-        <SignInContainer />
-      )
+      contentDiv = <SignIn />
     }
 
     return (
@@ -30,12 +22,15 @@ class App extends Component {
 }
 
 App.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.bool.isRequired,
+  accessToken: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    accessToken: state.auth.accessToken
   }
 }
 

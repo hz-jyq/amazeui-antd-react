@@ -1,40 +1,12 @@
 import React, { Component, PropTypes } from 'react'
-import { Spin, Form, Input, Checkbox, Button } from 'antd'
+import { Form, Input, Button } from 'antd'
 
 
 class SignInForm extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isLoading: false
-    }
-  }
-
-  handleSubmit(e) {
-    e.preventDefault()
-    this.props.form.validateFields((errors, values) => {
-      if (!!errors) {
-        return
-      }
-
-      console.log(values)
-      this.setState({
-        isLoading: true
-      })
-    })
-  }
-
   render() {
-    if (this.state.isLoading) {
-      return (
-        <Spin size="large" />
-      )
-    }
-
     const { getFieldProps } = this.props.form
 
-    const usernameProps = getFieldProps('username', {
+    const nameProps = getFieldProps('name', {
       rules: [
         { required: true, message: '请输入用户名' }
       ]
@@ -52,17 +24,13 @@ class SignInForm extends Component {
     }
 
     return (
-      <Form horizontal form={this.props.form} onSubmit={(e) => this.handleSubmit(e)}>
+      <Form horizontal form={this.props.form} onSubmit={(e) => { this.props.handleSubmit(e, this) }}>
         <Form.Item {...formItemLayout} label="帐号：&nbsp;&nbsp;">
-          <Input {...usernameProps} type="text" placeholder="请输入用户名" />
+          <Input {...nameProps} type="text" placeholder="请输入用户名" />
         </Form.Item>
 
         <Form.Item {...formItemLayout} label="密码：&nbsp;&nbsp;">
           <Input {...passwordProps} type="password" placeholder="请输入密码" />
-        </Form.Item>
-
-        <Form.Item {...formItemLayout} label=" ">
-          <Checkbox defaultChecked={false} disabled />记住我
         </Form.Item>
 
         <Form.Item {...formItemLayout} label=" ">
@@ -74,8 +42,8 @@ class SignInForm extends Component {
 }
 
 SignInForm.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
-  form: PropTypes.object
+  handleSubmit: PropTypes.func.isRequired,
+  form: PropTypes.object.isRequired
 }
 
 export default Form.create()(SignInForm)
