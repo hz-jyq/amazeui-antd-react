@@ -9,7 +9,7 @@ import createLogger from 'redux-logger'
 import * as reducers from 'ducks'
 import App from 'containers/App'
 
-import 'antd/lib/index.css'
+import 'antd/style/index.less'
 
 
 const store = createStore(
