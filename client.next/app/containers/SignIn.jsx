@@ -58,7 +58,11 @@ class SignIn extends Component {
     if (this.shouldRefreshToken()) {
       contentDiv = <Spin size="large" />
     } else {
-      contentDiv = <SignInForm handleSubmit={(e, signInForm) => { this.handleSignInFormSubmit(e, signInForm) }} />
+      contentDiv = (
+        <SignInForm
+          handleSubmit={(e, signInForm) => { this.handleSignInFormSubmit(e, signInForm) }}
+        />
+      )
     }
 
     return (
