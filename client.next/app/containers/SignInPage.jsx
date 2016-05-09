@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Spin, Row, Col } from 'antd'
+import { Spin, Row, Col, message } from 'antd'
 import request from 'superagent'
 
 import SignInForm from 'components/SignInForm'
@@ -47,6 +47,7 @@ class SignInPage extends Component {
       .send(credentials)
       .end((error, response) => {
         if (error) {
+          if (response.body && response.body.error) { message.error(response.body.error) }
           localStorage.setItem('accessToken', '')
           this.props.dispatch(requestToken(error))
         } else {
@@ -72,14 +73,14 @@ class SignInPage extends Component {
     }
 
     return (
-      <Row type="flex" justify="center">
+      <Row type="flex" justify="center" align="middle">
         <Col span="20" style={{ maxWidth: 480 }}>
           <img
             src={LogoImage}
             role="presentation"
             style={{
-              display: "block",
-              marginLeft: "auto", marginRight: "auto",
+              display: 'block',
+              marginLeft: 'auto', marginRight: 'auto',
               marginTop: 36, marginBottom: 24,
               maxWidth: 240
             }}

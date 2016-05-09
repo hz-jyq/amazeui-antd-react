@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Menu, Icon } from 'antd'
+import { Row, Col, Menu, Icon } from 'antd'
 
 import { cleanupToken } from 'ducks/auth'
 
@@ -13,16 +13,31 @@ class GlobalNavBar extends Component {
     }
   }
 
+  renderDropdownMenu() {
+    if (!this.props.isAuthenticated) {
+      return (
+        <Menu.Item disabled>
+          <span>&nbsp;</span>
+        </Menu.Item>
+      )
+    }
+
+    return (
+      <Menu.SubMenu title={<span><Icon type="user" />{this.props.userName}</span>}>
+        <Menu.Item key="user:sign_out">注销</Menu.Item>
+      </Menu.SubMenu>
+    )
+  }
+
   render() {
     return (
-      <Menu
-        mode="horizontal"
-        onClick={(e) => { this.handleMenuClick(e) }}
-      >
-        <Menu.SubMenu title={<span><Icon type="user" />{this.props.userName}</span>}>
-          <Menu.Item key="user:sign_out">注销</Menu.Item>
-        </Menu.SubMenu>
-      </Menu>
+      <Row>
+        <Col span="4" push="18">
+          <Menu mode="horizontal" onClick={(e) => { this.handleMenuClick(e) }} >
+            {this.renderDropdownMenu()}
+          </Menu>
+        </Col>
+      </Row>
     )
   }
 }

@@ -3,8 +3,8 @@ class UsersController < Sinatra::Base
 
   post '/authenticate' do
     user = User.where(name: params[:user][:name]).first
-    halt 401, jbuilder(%(json.error 'wrong username or password')) unless user.present?
-    halt 401, jbuilder(%(json.error 'wrong username or password')) unless user.authenticate(params[:user][:password])
+    halt 401, jbuilder(%(json.error '用户名或密码错误')) unless user.present?
+    halt 401, jbuilder(%(json.error '用户名或密码错误')) unless user.authenticate(params[:user][:password])
 
     token = Rack::JWT::Token.encode({ sub: user.id }, Settings[:session][:secret])
 
