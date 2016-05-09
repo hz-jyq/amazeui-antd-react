@@ -32,6 +32,9 @@ const webpackConfig = {
     }, {
       test: /\.css$/,
       loader: 'style!css'
+    }, {
+      test: /\.(png|jpg)$/,
+      loader: 'url?limit=8192'
     }]
   },
   plugins: [

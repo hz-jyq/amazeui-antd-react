@@ -11,7 +11,8 @@ export const cleanupToken = createAction(CLEANUP_TOKEN)
 
 export default function reducer(state = {
   isAuthenticated: false,
-  accessToken: localStorage.getItem('accessToken') || ''
+  accessToken: localStorage.getItem('accessToken') || '',
+  userName: ''
 }, action) {
   switch (action.type) {
     case REQUEST_TOKEN:
@@ -19,18 +20,21 @@ export default function reducer(state = {
       if (action.error) {
         return {
           isAuthenticated: false,
-          accessToken: ''
+          accessToken: '',
+          userName: ''
         }
       }
 
       return {
         isAuthenticated: true,
-        accessToken: action.payload.accessToken
+        accessToken: action.payload.accessToken,
+        userName: action.payload.user.name
       }
     case CLEANUP_TOKEN:
       return {
         isAuthenticated: false,
-        accessToken: ''
+        accessToken: '',
+        userName: ''
       }
     default:
       return state

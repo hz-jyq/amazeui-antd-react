@@ -27,7 +27,7 @@ class SignInForm extends Component {
       <Form
         horizontal
         form={this.props.form}
-        onSubmit={(e) => { this.props.handleSubmit(e, this) }}
+        onSubmit={(e) => { this.props.handleSubmit(e, this.props.form) }}
       >
         <Form.Item {...formItemLayout} label="帐号：&nbsp;&nbsp;">
           <Input {...nameProps} type="text" placeholder="请输入用户名" />
