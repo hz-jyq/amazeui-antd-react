@@ -24,9 +24,6 @@ import request  from 'superagent';
 
 class Main extends Component {
   render() {
-      var  strStoreDate = window.localStorage? localStorage.getItem("Authorization"): Cookie.read("Authorization");
-      var url="localhost"
-      window.req =function(str){request.get(url+str).set("Authorization", strStoreDate).set('Content-Type', 'application/json');}
       return (
           <div>
              <Title/>
