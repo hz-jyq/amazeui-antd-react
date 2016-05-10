@@ -11,7 +11,7 @@ class App extends Component {
       return (
         <div>
           <GlobalNavBar />
-          <p>HOME PAGE</p>
+          {this.props.children}
         </div>
       )
     }

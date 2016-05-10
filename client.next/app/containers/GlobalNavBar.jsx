@@ -7,7 +7,7 @@ import { cleanupToken } from 'ducks/auth'
 
 class GlobalNavBar extends Component {
   handleMenuClick(e) {
-    if (e.key === 'user:sign_out') {
+    if (e.key === 'user:signOut') {
       localStorage.setItem('accessToken', '')
       this.props.dispatch(cleanupToken())
     }
@@ -24,15 +24,15 @@ class GlobalNavBar extends Component {
 
     return (
       <Menu.SubMenu title={<span><Icon type="user" />{this.props.userName}</span>}>
-        <Menu.Item key="user:sign_out">注销</Menu.Item>
+        <Menu.Item key="user:signOut">注销</Menu.Item>
       </Menu.SubMenu>
     )
   }
 
   render() {
     return (
-      <Row>
-        <Col span="4" push="18">
+      <Row style={{ background: '#FFFFFF' }}>
+        <Col span="4" push="20">
           <Menu mode="horizontal" onClick={(e) => { this.handleMenuClick(e) }} >
             {this.renderDropdownMenu()}
           </Menu>

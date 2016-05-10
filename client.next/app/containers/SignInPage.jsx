@@ -64,8 +64,8 @@ class SignInPage extends Component {
 
     if (this.shouldRefreshToken()) {
       return (
-        <Row type="flex" justify="center" align="middle">
-          <Col span="4" style={{ marginTop: 60 }}>
+        <Row type="flex" justify="center" align="middle" style={{ marginTop: 60 }}>
+          <Col span="4">
             <Spin size="large" />
           </Col>
         </Row>
@@ -73,8 +73,8 @@ class SignInPage extends Component {
     }
 
     return (
-      <Row type="flex" justify="center" align="middle">
-        <Col span="20" style={{ maxWidth: 480 }}>
+      <Row type="flex" justify="center" align="middle" style={{ marginTop: 72 }}>
+        <Col span="20" style={{ maxWidth: 480, background: "#FFFFFF" }}>
           <img
             src={LogoImage}
             role="presentation"
