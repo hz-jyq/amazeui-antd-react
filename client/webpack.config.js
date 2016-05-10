@@ -68,7 +68,15 @@ const different = function(build) {
           progress: true,
           stats: 'errors-only',
           host: process.env.HOST,
-          port: process.env.PORT
+          port:8000,
+          proxy: {
+            '/api/*': {
+              target: 'http://127.0.0.1:3000/',
+              rewrite: function(req) {
+                req.url = req.url.replace(/^\/api/, '')
+              }
+            }
+          }
         },
         plugins: [
           new webpack.HotModuleReplacementPlugin()
