@@ -74,7 +74,7 @@ class SignInPage extends Component {
 
     return (
       <Row type="flex" justify="center" align="middle" style={{ marginTop: 72 }}>
-        <Col span="20" style={{ maxWidth: 480, background: "#FFFFFF" }}>
+        <Col span="20" style={{ maxWidth: 480, background: '#FFFFFF' }}>
           <img
             src={LogoImage}
             role="presentation"
