@@ -13,8 +13,8 @@ export default class DataGrid extends Component {
     }
     loadCommentsFromServer=()=> {
         var _this=this;
-        debugger;
-        window.req(str).get('http://127.0.0.1:3000/suggestion_types').end(function (err, res) {
+        var  strStoreDate = window.localStorage? localStorage.getItem("Authorization"): Cookie.read("Authorization");
+        request.post('api/suggestion_types').type("json").end(function (err, res) {
             if (res.ok) {
                 _this.setState({
                     data: res.body

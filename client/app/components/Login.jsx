@@ -25,7 +25,7 @@ export default class  extends Component {
           var name=this.refs.name.getValue();
           var pwd=this.refs.pwd.getValue();
           var _this=this;
-          request.post('/api/users/authenticate').("type").send({user:{ name: name, password: pwd }}).end(function(err, res){
+          request.post('/api/users/authenticate').type("json").send({user:{ name: name, password: pwd }}).end(function(err, res){
               if (res.ok) {
                   if (window.localStorage) {
                       localStorage.setItem("Authorization", "Bearer "+res.body.token
