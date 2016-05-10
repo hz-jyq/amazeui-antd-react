@@ -13,6 +13,8 @@ import PublicPage from 'containers/SuggestionManagement/PublicPage'
 import SubmitterPage from 'containers/SuggestionManagement/SubmitterPage'
 import ReviewerPage from 'containers/SuggestionManagement/ReviewerPage'
 import PresenterPage from 'containers/SuggestionManagement/PresenterPage'
+import SuggestionTypesPage from 'containers/SuggestionManagementAdminArea/SuggestionTypesPage'
+import AwardTypesPage from 'containers/SuggestionManagementAdminArea/AwardTypesPage'
 
 import 'antd/style/index.less'
 
@@ -32,6 +34,8 @@ const routes = (
       <Route path="/suggestions/identifier=submitter" component={SubmitterPage} />
       <Route path="/suggestions/identifier=reviewer" component={ReviewerPage} />
       <Route path="/awards/identifier=presenter" component={PresenterPage} />
+      <Route path="/suggestion-types" component={SuggestionTypesPage} />
+      <Route path="/award-types" component={AwardTypesPage} />
     </Route>
   </Route>
 )

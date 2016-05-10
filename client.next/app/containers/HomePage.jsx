@@ -22,8 +22,8 @@ class HomePage extends Component {
           <Menu.Item key="/suggestions/identifier=reviewer">待我审批</Menu.Item>
           <Menu.Item key="/awards/identifier=presenter">待我奖励</Menu.Item>
           <Menu.SubMenu key="suggestion-management-admin-area" title={<span>管理区域</span>}>
-            <Menu.Item key="#1">意见类型</Menu.Item>
-            <Menu.Item key="#2">奖励类型</Menu.Item>
+            <Menu.Item key="/suggestion-types">意见类型</Menu.Item>
+            <Menu.Item key="/award-types">奖励类型</Menu.Item>
           </Menu.SubMenu>
         </Menu.SubMenu>
       </Menu>
