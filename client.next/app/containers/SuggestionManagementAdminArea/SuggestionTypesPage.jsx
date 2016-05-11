@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { Table } from 'antd'
+import { Table, Button, Popconfirm, message } from 'antd'
 import request from 'superagent'
+import { requestRecords, destroyRecord } from 'ducks/suggestionTypes'
 
 
 class SuggestionTypesPage extends Component {
@@ -34,19 +35,21 @@ class SuggestionTypesPage extends Component {
       title: '常用操作',
       dataIndex: 'operation',
       key: 'operation',
-      render: () => (
+      render: (text, record) => (
         <span>
           <a href="#">编辑&nbsp;</a>
+
           <span className="ant-divider"></span>
-          <a href="#">&nbsp;删除</a>
+
+          <Popconfirm
+            title="确定要删除这个意见类型吗？"
+            onConfirm={() => { this.handleDeleteOperationConfirm(record) }}
+          >
+            <a href="#">&nbsp;删除</a>
+          </Popconfirm>
         </span>
       )
     }]
-
-    this.state = {
-      isLoading: true,
-      records: []
-    }
   }
 
   componentDidMount() {
@@ -54,14 +57,9 @@ class SuggestionTypesPage extends Component {
       .set('AUTHORIZATION', `Bearer ${localStorage.getItem('accessToken')}`)
       .end((error, response) => {
         if (error) {
-          this.setState({
-            isLoading: false
-          })
+          this.props.dispatch(requestRecords(error))
         } else {
-          this.setState({
-            isLoading: false,
-            records: response.body
-          })
+          this.props.dispatch(requestRecords(response.body))
         }
       })
   }
@@ -70,25 +68,48 @@ class SuggestionTypesPage extends Component {
     this.xhr.abort()
   }
 
+  handleDeleteOperationConfirm(record) {
+    request.del(`/api/suggestion_types/${record.id}`).type('json')
+      .set('AUTHORIZATION', `Bearer ${localStorage.getItem('accessToken')}`)
+      .end((error, response) => {
+        if (error) {
+          if (response.body && response.body.error) { message.error(response.body.error) }
+          this.props.dispatch(destroyRecord(error))
+        } else {
+          this.props.dispatch(destroyRecord({ id: record.id }))
+        }
+      })
+  }
+
   render() {
     return (
-      <Table bordered={true} loading={this.state.isLoading}
-        rowKey={record => record.id}
-        columns={this.tableColumns}
-        dataSource={this.state.records}
-        pagination={false}
-      />
+      <div>
+        <div style={{ marginBottom: 12 }}>
+          <Button type="primary">新建意见类型</Button>
+        </div>
+        <Table
+          bordered
+          loading={this.props.loading}
+          rowKey={record => record.id}
+          columns={this.tableColumns}
+          dataSource={this.props.records}
+          pagination={false}
+        />
+      </div>
     )
   }
 }
 
 SuggestionTypesPage.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  records: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
-function mapStateToProps(/* state */) {
+function mapStateToProps(state) {
   return {
-    // ...
+    loading: state.suggestionTypes.loading,
+    records: state.suggestionTypes.records
   }
 }
 
