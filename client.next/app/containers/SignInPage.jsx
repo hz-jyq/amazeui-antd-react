@@ -100,17 +100,13 @@ class SignInPage extends Component {
 SignInPage.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   accessToken: PropTypes.string.isRequired,
-  userName: PropTypes.string.isRequired,
-  userRole: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
   return {
     isAuthenticated: state.auth.isAuthenticated,
-    accessToken: state.auth.accessToken,
-    userName: state.auth.userName,
-    userRole: state.auth.userRole
+    accessToken: state.auth.accessToken
   }
 }
 

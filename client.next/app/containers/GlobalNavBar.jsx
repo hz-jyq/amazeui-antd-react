@@ -44,18 +44,14 @@ class GlobalNavBar extends Component {
 
 GlobalNavBar.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  accessToken: PropTypes.string.isRequired,
   userName: PropTypes.string.isRequired,
-  userRole: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
   return {
     isAuthenticated: state.auth.isAuthenticated,
-    accessToken: state.auth.accessToken,
-    userName: state.auth.userName,
-    userRole: state.auth.userRole
+    userName: state.auth.userName
   }
 }
 

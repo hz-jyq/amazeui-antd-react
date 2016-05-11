@@ -27,19 +27,12 @@ class App extends Component {
 
 App.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  accessToken: PropTypes.string.isRequired,
-  userName: PropTypes.string.isRequired,
-  userRole: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-  dispatch: PropTypes.func.isRequired
+  children: PropTypes.node.isRequired
 }
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: state.auth.isAuthenticated,
-    accessToken: state.auth.accessToken,
-    userName: state.auth.userName,
-    userRole: state.auth.userRole
+    isAuthenticated: state.auth.isAuthenticated
   }
 }
 
