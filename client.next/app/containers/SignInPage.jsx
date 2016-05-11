@@ -11,7 +11,9 @@ import LogoImage from 'assets/images/logo.png'
 
 class SignInPage extends Component {
   componentDidMount() {
-    if (this.shouldRefreshToken()) { this.refreshToken() }
+    if (this.shouldRefreshToken()) {
+      this.refreshToken()
+    }
   }
 
   handleSignInFormSubmit(e, form) {
@@ -99,6 +101,7 @@ SignInPage.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   accessToken: PropTypes.string.isRequired,
   userName: PropTypes.string.isRequired,
+  userRole: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
@@ -106,7 +109,8 @@ function mapStateToProps(state) {
   return {
     isAuthenticated: state.auth.isAuthenticated,
     accessToken: state.auth.accessToken,
-    userName: state.auth.userName
+    userName: state.auth.userName,
+    userRole: state.auth.userRole
   }
 }
 

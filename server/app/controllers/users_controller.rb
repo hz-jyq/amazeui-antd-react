@@ -10,7 +10,7 @@ class UsersController < Sinatra::Base
 
     r = jbuilder <<-EOT, locals: { user: user }
       json.accessToken '#{token}'
-      json.user user, :name
+      json.user user, :name, :role
     EOT
     halt 201, r
   end
@@ -20,7 +20,7 @@ class UsersController < Sinatra::Base
 
     r = jbuilder <<-EOT, locals: { user: current_user }
       json.accessToken '#{token}'
-      json.user user, :name
+      json.user user, :name, :role
     EOT
     halt 201, r
   end
