@@ -16,6 +16,7 @@ AwardTypesPage.propTypes = {
 
 function mapStateToProps(/* state */) {
   return {
+    // ...
   }
 }
 

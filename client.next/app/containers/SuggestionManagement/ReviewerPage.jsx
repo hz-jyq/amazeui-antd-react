@@ -16,6 +16,7 @@ ReviewerPage.propTypes = {
 
 function mapStateToProps(/* state */) {
   return {
+    // ...
   }
 }
 

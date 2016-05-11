@@ -16,6 +16,7 @@ PresenterPage.propTypes = {
 
 function mapStateToProps(/* state */) {
   return {
+    // ...
   }
 }
 

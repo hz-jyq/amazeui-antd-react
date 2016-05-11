@@ -16,6 +16,7 @@ PublicPage.propTypes = {
 
 function mapStateToProps(/* state */) {
   return {
+    // ...
   }
 }
 

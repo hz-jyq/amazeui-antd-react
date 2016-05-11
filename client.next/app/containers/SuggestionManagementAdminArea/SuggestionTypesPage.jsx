@@ -16,6 +16,7 @@ SuggestionTypesPage.propTypes = {
 
 function mapStateToProps(/* state */) {
   return {
+    // ...
   }
 }
 

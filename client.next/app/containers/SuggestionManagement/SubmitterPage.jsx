@@ -16,6 +16,7 @@ SubmitterPage.propTypes = {
 
 function mapStateToProps(/* state */) {
   return {
+    // ...
   }
 }
 
