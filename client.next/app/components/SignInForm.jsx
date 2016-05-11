@@ -7,15 +7,15 @@ class SignInForm extends Component {
     const { getFieldProps } = this.props.form
 
     const nameProps = getFieldProps('name', {
-      rules: [
-        { required: true, message: '请输入用户名' }
-      ]
+      rules: [{
+        required: true, message: '请输入用户名'
+      }]
     })
 
     const passwordProps = getFieldProps('password', {
-      rules: [
-        { required: true, message: '请输入密码' }
-      ]
+      rules: [{
+        required: true, message: '请输入密码'
+      }]
     })
 
     const formItemLayout = {

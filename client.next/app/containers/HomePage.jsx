@@ -56,7 +56,7 @@ class HomePage extends Component {
             {this.renderMenu()}
           </Menu>
         </Col>
-        <Col>
+        <Col span="18" offset="1" style={{ marginTop: 48 }}>
           {this.props.children}
         </Col>
       </Row>
