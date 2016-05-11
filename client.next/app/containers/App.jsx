@@ -30,6 +30,7 @@ App.propTypes = {
   accessToken: PropTypes.string.isRequired,
   userName: PropTypes.string.isRequired,
   userRole: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 

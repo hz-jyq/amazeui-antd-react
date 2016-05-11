@@ -8,8 +8,12 @@ class HomePage extends Component {
     this.context.router.push(e.key)
   }
 
+  isAdminUser() {
+    return this.props.userRole === 'manager'
+  }
+
   renderMenu() {
-    if (this.props.userRole !== 'manager') {
+    if (!this.isAdminUser()) {
       return (
         <Menu.SubMenu key="suggestion-management" title={<span>意见管理</span>}>
           <Menu.Item key="/suggestions/identifier=none">公共区域</Menu.Item>
@@ -35,12 +39,17 @@ class HomePage extends Component {
   }
 
   render() {
+    let defaultOpenKeys = ['suggestion-management']
+    if (['/suggestion-types', '/award-types'].includes(location.pathname)) {
+      defaultOpenKeys.push('suggestion-management-admin-area')
+    }
+
     return (
       <Row style={{ marginLeft: 120, marginRight: 120, marginTop: 48, background: '#FFFFFF' }} >
         <Col span="4">
           <Menu
             onClick={(e) => { this.handleMenuClick(e) }}
-            defaultOpenKeys={['suggestion-management']}
+            defaultOpenKeys={defaultOpenKeys}
             defaultSelectedKeys={[location.pathname]}
             mode="inline"
           >
@@ -64,6 +73,7 @@ HomePage.propTypes = {
   accessToken: PropTypes.string.isRequired,
   userName: PropTypes.string.isRequired,
   userRole: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   dispatch: PropTypes.func.isRequired
 }
 
