@@ -5,19 +5,21 @@ RSpec.describe UsersController, type: :controller do
     it 'expected response code 201' do
       post '/users/authenticate', user: { name: user.name, password: 'password' }
       expect(response_status).to eq(201)
-      expect(response_body_as_json).to have_key('token')
+      expect(response_body_as_json).to have_key('accessToken')
+      expect(response_body_as_json['user']).to have_key('name')
+      expect(response_body_as_json['user']).to have_key('role')
     end
 
     it 'expected response code 401 when use wrong username' do
       post '/users/authenticate', user: { name: "W#{user.name}", password: 'password' }
       expect(response_status).to eq(401)
-      expect(response_body_as_json['error']).to match(/wrong.*username/)
+      expect(response_body_as_json['error']).to match(/用户名.*错误/)
     end
 
     it 'expected response code 401 when use wrong password' do
       post '/users/authenticate', user: { name: user.name, password: 'wrong password' }
       expect(response_status).to eq(401)
-      expect(response_body_as_json['error']).to match(/wrong.*password/)
+      expect(response_body_as_json['error']).to match(/密码.*错误/)
     end
   end
 
