@@ -51,6 +51,7 @@ const webpackConfig = {
       }
     })
   ],
+  devtool: 'source-map',
   devServer: {
     inline: true,
     historyApiFallback: true,
