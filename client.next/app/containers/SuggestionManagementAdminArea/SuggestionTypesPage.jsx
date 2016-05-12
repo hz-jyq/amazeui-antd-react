@@ -4,6 +4,8 @@ import { Table, Button, Popconfirm, message } from 'antd'
 import request from 'superagent'
 import { requestRecords, destroyRecord } from 'ducks/suggestionTypes'
 
+import SuggestionTypeModal from 'components/SuggestionTypeModal'
+
 
 class SuggestionTypesPage extends Component {
   constructor(props) {
@@ -95,6 +97,7 @@ class SuggestionTypesPage extends Component {
           dataSource={this.props.records}
           pagination={false}
         />
+        <SuggestionTypeModal />
       </div>
     )
   }
