@@ -4,7 +4,7 @@ class AwardRulesController < Sinatra::Base
   get '/' do
     authorize! AwardRule, :listable?
 
-    r = jbuilder <<-EOT, locals: { c: AwardRule.all }
+    r = jbuilder <<-EOT, locals: { c: AwardRule.all.includes(:presenter) }
       json.array! c do |a|
         json.(a, :id, :score_accepted_level, :action)
         json.presenter a.presenter, :id, :name

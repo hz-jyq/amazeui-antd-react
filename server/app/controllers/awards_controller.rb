@@ -11,7 +11,7 @@ class AwardsController < Sinatra::Base
         end
     c = c.page(params[:page]).per_page(params[:per_page])
 
-    r = jbuilder <<-EOT, locals: { c: c }
+    r = jbuilder <<-EOT, locals: { c: c.includes(:holder, :presenter) }
       json.array! c do |s|
         json.(s, :id, :action, :awarded)
         json.holder s.holder, :id, :name

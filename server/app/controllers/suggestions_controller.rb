@@ -11,7 +11,7 @@ class SuggestionsController < Sinatra::Base
         end
     c = c.page(params[:page]).per_page(params[:per_page])
 
-    r = jbuilder <<-EOT, locals: { c: c }
+    r = jbuilder <<-EOT, locals: { c: c.includes(:suggestion_type, :submitter) }
       json.array! c do |s|
         json.(s, :id, :title, :created_at, :state, :score)
         json.suggestion_type s.suggestion_type, :id, :name
