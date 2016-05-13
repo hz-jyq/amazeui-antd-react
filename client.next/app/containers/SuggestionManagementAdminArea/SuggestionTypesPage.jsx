@@ -97,7 +97,9 @@ class SuggestionTypesPage extends Component {
           dataSource={this.props.records}
           pagination={false}
         />
-        <SuggestionTypeModal />
+        <SuggestionTypeModal
+          visible={false}
+        />
       </div>
     )
   }

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Modal, Form, Input, RadioGroup, Radio, Select, Button } from 'antd'
+import { Modal, Form, Input, Radio } from 'antd'
 
 
 class SuggestionTypeModal extends Component {
@@ -36,6 +36,7 @@ class SuggestionTypeModal extends Component {
 }
 
 SuggestionTypeModal.propTypes = {
+  visible: PropTypes.bool.isRequired,
   form: PropTypes.object.isRequired
 }
 
