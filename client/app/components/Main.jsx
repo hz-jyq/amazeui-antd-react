@@ -1,58 +1,40 @@
 import React, {Component,PropTypes} from 'react';
 import {Router, Route, IndexRoute, browserHistory,IndexLink,Link,hashHistory,RoutingContext} from 'react-router';
-import {NavItem,Nav,Icon,Panel} from 'amazeui-react';
+import {NavItem,Nav,Icon,Panel,Grid,Col,Container} from 'amazeui-react';
 import {render} from 'react-dom'
-import Top from './Top';
-import Tree from './MenuLeft';
-import MyEvaluationCenter from './MyEvaluationCenter';
-import AdviceTypeCenter from './AdviceTypeCenter';
 import Title from './Title';
 import Left from './Left';
-import Footer from './FooterBuff';
-import HeadButton from './HeadButton';
-import Login from './Login';
-import Registered from './Registered';
-import MyOpinionCenter from './OpinionCenter';
-import AddAdvice from './AddAdviceType';
-import UpdateAdvice from './UpdateAdvice';
-import ViewAdvice from './ViewAdvice';
-import AddOpinion from './AddOpinion';
-import EvaluationTypeCenter from './EvaluationTypeCenter';
-import addEvaluationType from './AddEvaluationType';
+import Login from './user/Login';
+import Registered from './user/Registered';
+import AdviceTypeCenter from './advice/AdviceTypeCenter';
+import AdviceTypeUpdate from './advice/AdviceTypeUpdate';
+import AdviceTypeView from './advice/AdviceTypeView';
+import AdviceTypeAdd from './advice/AdviceTypeAdd';
 import request  from 'superagent';
 
-
 class Main extends Component {
-  render() {
+    render() {
+        window.strStoreDate = window.localStorage? localStorage.getItem("Authorization"): Cookie.read("Authorization");
       return (
           <div>
-             <Title/>
-              <div >
-               <Left/>
-                  <div className="center">
-                      {this.props.children}
-                     </div>
-              </div>
+              <Grid  className="doc-g">
+                  <Title/>
+                  <Col sm={1}><Left/></Col>
+                  <Col sm={11}> {this.props.children}</Col>
+              </Grid>
           </div>
       )
   }
 }
 render((
-    <Router history={hashHistory}>
+    <Router history={browserHistory}>
         <Route path="/login" component={Main}>
-            <Route path="/MyOpinionCenter" component={MyOpinionCenter} />
-            <Route path="/MyEvaluationCenter" component={MyEvaluationCenter} />
-            <Route path="/EvaluationTypeCenter" component={EvaluationTypeCenter} />
             <Route path="/AdviceTypeCenter" component={AdviceTypeCenter} />
-            <Route path="/AdviceTypeCenter/update"   component={UpdateAdvice} />
-            <Route path="/AdviceTypeCenter/view"   component={ViewAdvice} />
-            <Route path="/addAdviceType" component={AddAdvice} />
-            <Route path="/addOpinion" component={AddOpinion} />
-            <Route path="/addEvaluation" component={AddAdvice} />
-            <Route path="/addEvaluationType" component={addEvaluationType} />
+            <Route path="/AdviceTypeCenter/update"   component={AdviceTypeUpdate} />
+            <Route path="/AdviceTypeCenter/view"   component={AdviceTypeView} />
+            <Route path="/AdviceTypeAdd"   component={AdviceTypeAdd} />
         </Route>
         <Route path="/" component={Login}></Route>
         <Route path="/registered" component={Registered}></Route>
     </Router>
 ), document.getElementById("main"))
-

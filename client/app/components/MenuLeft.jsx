@@ -3,7 +3,6 @@ import { render } from 'react-dom'
 import {Router, Route, IndexRoute, browserHistory,IndexLink,Link} from 'react-router';
 import {Accordion,Button,Icon,Menu,Topbar,CollapsibleNav,Nav,NavItem,ListItem,List,Panel} from 'amazeui-react';
 import HeadButton from './HeadButton';
-import Center from './AdviceTypeCenter';
 import Main from './Main';
 import Footer from './FooterBuff';
 
@@ -28,8 +27,8 @@ export default class MenuLeft extends Component {
                 <Icon icon="home" />首页</NavItem>
                  <NavItem><Link to="/MyOpinionCenter">我提出的</Link></NavItem>
                  <NavItem ><Link to="/MyEvaluationCenter">我评价的</Link></NavItem>
-                <NavItem ><Link to="/EvaluationTypeCenter">待我奖励</Link></NavItem>
-                 <NavItem ><Link to="/AdviceTypeCenter">类型管理</Link></NavItem>
+                 <NavItem ><Link to="/EvaluationTypeCenter">待我奖励</Link></NavItem>
+                 <NavItem ><Link to="/AdviceTypeCenter">建议类型</Link></NavItem>
                  <NavItem ><Link to="/EvaluationTypeCenter">评价管理</Link></NavItem>
         </Nav>
         </div>
@@ -49,8 +48,3 @@ export default class MenuLeft extends Component {
     }
 }*/
          )}}
-
-
-
-
-
