@@ -29,7 +29,7 @@ export default class AdviceTypeDataGrid extends Component {
     render() {
         var _this=this;
         return (
-            <div>
+            <div className="dataGrid">
                 <Table hover striped>
                     <thead>
                     <tr>

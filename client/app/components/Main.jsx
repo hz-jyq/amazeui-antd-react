@@ -29,7 +29,7 @@ class Main extends Component {
 render((
     <Router history={browserHistory}>
         <Route path="/login" component={Main}>
-            <Route path="/AdviceTypeCenter" component={AdviceTypeCenter} />
+            <Route path="/AdviceTypeCenter" component={AdviceTypeCenter}/>
             <Route path="/AdviceTypeCenter/update"   component={AdviceTypeUpdate} />
             <Route path="/AdviceTypeCenter/view"   component={AdviceTypeView} />
             <Route path="/AdviceTypeAdd"   component={AdviceTypeAdd} />

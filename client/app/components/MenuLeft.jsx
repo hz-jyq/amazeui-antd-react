@@ -21,7 +21,7 @@ export default class MenuLeft extends Component {
         var themes = [ 'gapped'];
         var br = <br />;
          return (
-    <div className="tree left">
+    <div>
         <Nav>
             <NavItem href="http://www.amazeui.org">
                 <Icon icon="home" />首页</NavItem>

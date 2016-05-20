@@ -53,7 +53,7 @@ export default class AdviceTypeUpdate extends Component {
     }
     //初始化
     loadCommentsFromServer =function(e) {
-        request.get(`/api/suggestion_types/${this.props.location.query.id}`).set("Authorization",{strStoreDate}.strStoreDate).set('Content-Type', 'application/json').end(function (err, res) {
+        request.get(`/api/suggestion_types/${this.props.location.query.id}`).set("Authorization",{strStoreDate}.strStoreDate).type("json").end(function (err, res) {
             if (res.ok) {
                 e.refs.select.state.value =res.body.reviewers.map(((item)=>{return item.id})).join(",");
                 e.setState({
@@ -108,7 +108,7 @@ export default class AdviceTypeUpdate extends Component {
         <NavIndex/>
         <Grid>
             <Col sm={11}>
-                 <Form horizontal onSubmit={this.onSubmit.bind(this)}>
+                 <Form horizontal onSubmit={this.onSubmit}>
                   <Input type="textarea" label="类型名称：" labelClassName="am-u-sm-1"  wrapperClassName="am-u-sm-11" value={this.state.name}   ref="name" onChange={this.getName} id="name"/>
                    <Input type="textarea" label="描述：" labelClassName="am-u-sm-1" wrapperClassName="am-u-sm-11"  value={this.state.description}  ref="description" onChange={this.description} id="description"/>
                   <div>

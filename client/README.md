@@ -7,7 +7,7 @@ It took me several days to learn and assemble these pieces, so this boilerplate 
 
 2. Download the repository
    ```
-   git clone https://github.com/J-F-Liu/webpack-react-boilerplate.git
+   git clone   https://github.com/hz-jyq/amazeui-antd-react.git
    cd webpack-react-boilerplate
    ```
 3. Checkout `react-router` branch if you want to use react-router
