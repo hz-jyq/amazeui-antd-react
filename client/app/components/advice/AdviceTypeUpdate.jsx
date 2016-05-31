@@ -12,9 +12,9 @@ export default class AdviceTypeUpdate extends Component {
             description:"",
             selectData: [],
             public:true,
-            reviewers:[]
-        };
-        this.getName=this.getName.bind(this);
+            reviewers:[],
+            selectValue:'',
+        }
     };
     //类型名字
     getName(e) {
@@ -39,7 +39,7 @@ export default class AdviceTypeUpdate extends Component {
     onSubmit=(e)=>{
         var _this=this;
         var json={};
-       json["name"]=this.refs.name.getValue()
+        json["name"]=this.refs.name.getValue()
         json["description"]=this.refs.description.getValue();
         json["reviewer_ids"]=this.refs.select.getValue().split(',');
         json["public"]=this.state.public;
@@ -55,26 +55,26 @@ export default class AdviceTypeUpdate extends Component {
     loadCommentsFromServer =function(e) {
         request.get(`/api/suggestion_types/${this.props.location.query.id}`).set("Authorization",{strStoreDate}.strStoreDate).type("json").end(function (err, res) {
             if (res.ok) {
-                e.refs.select.state.value =res.body.reviewers.map(((item)=>{return item.id})).join(",");
                 e.setState({
                     name: res.body.name,
                     description:res.body.description,
                     public:res.body.public,
-                    reviewers:res.body.reviewers
+                    reviewers:res.body.reviewers,
+                    selectValue:res.body.reviewers.map(((item)=>{return item.id})).join(",")
                 })
             } else {
                 alert('Oh no! error ' + res.text);
             }
         });
-        request.get(`/api/users`).set("Authorization", {strStoreDate}.strStoreDate).set('Content-Type', 'application/json').end(function (err, res) {
+        request.get(`/api/users`).set("Authorization", {strStoreDate}.strStoreDate).type("json").end(function (err, res) {
             if (res.ok) {
-                var jsonarray=new Array();
-                for(var i=0;i<res.body.length;i++){
-                    var json={};
-                    json["value"]= res.body[i].id;
-                    json["label"]= res.body[i].name;
-                    jsonarray.push(json);
-                }
+             var jsonarray=new Array();
+                res.body.forEach(function(value){
+                  var json={};
+                  json["value"]= value.id;
+                  json["label"]= value.name;
+                  jsonarray.push(json);
+                });
                 e.setState({
                     selectData: jsonarray
                 })
@@ -96,13 +96,9 @@ export default class AdviceTypeUpdate extends Component {
           data:this.state.selectData,
           multiple: true,
           maxHeight: 150,
-          searchBox: true
+          searchBox: true,
+          value:this.state.selectValue
       };
-
-        const Jyq = (
-            <Modal title="Amaze UI Modal">
-                通过ModalTrigger的props打开Modal
-            </Modal>);
       return (
     <div  >
         <NavIndex/>
