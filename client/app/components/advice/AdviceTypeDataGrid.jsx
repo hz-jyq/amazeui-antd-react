@@ -3,12 +3,14 @@ import TypeRow from './AdviceTypeRow';
 import {Router, Route, IndexRoute, browserHistory,Link} from 'react-router';
 import React, {Component} from 'react';
 import {Table,Button,Icon,ModalTrigger,Modal,EventRow,EventsTable}from 'amazeui-react';
+import {Loading} from '../common';
 
 export default class AdviceTypeDataGrid extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: []
+            data: [],
+            loadMsg:"正在加载..."
         }
     }
     loadCommentsFromServer=()=> {
@@ -27,6 +29,7 @@ export default class AdviceTypeDataGrid extends Component {
         this.loadCommentsFromServer();
     }
     render() {
+      let {loadState} = this.state;
         var _this=this;
         return (
             <div className="dataGrid">

@@ -17,11 +17,9 @@ export default class AdviceTypeCenter extends Component {
                 <NavIndex/>
                 <HeadButton router="/AdviceTypeAdd" />
                 <ButtonBuff/>
-                <div>
-                    <AdviceTypeDataGrid/>
-                    <Pagtion/>
-                    <Footer/>
-                </div>
+                <AdviceTypeDataGrid/>
+                <Pagtion/>
+                <Footer/>
             </div>
         )
     }

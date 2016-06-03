@@ -11,6 +11,7 @@ import AdviceTypeUpdate from './advice/AdviceTypeUpdate';
 import AdviceTypeView from './advice/AdviceTypeView';
 import AdviceTypeAdd from './advice/AdviceTypeAdd';
 import request  from 'superagent';
+import  NotFound from './NotFound';
 
 class Main extends Component {
     render() {
@@ -33,6 +34,7 @@ render((
             <Route path="/AdviceTypeCenter/update"   component={AdviceTypeUpdate} />
             <Route path="/AdviceTypeCenter/view"   component={AdviceTypeView} />
             <Route path="/AdviceTypeAdd"   component={AdviceTypeAdd} />
+            <Route path="*"   component={NotFound} />
         </Route>
         <Route path="/" component={Login}></Route>
         <Route path="/registered" component={Registered}></Route>

@@ -18,7 +18,7 @@ export default  class AdviceTypeRow extends Component {
         var event = this.props.event;
         var modal = <Modal type="confirm" eventRow={event}>你，确定要删除这条记录吗？</Modal>;
         var ButtonUpdate=<Link  to={{ pathname: '/AdviceTypeCenter/update', query: { id: event.id } }}> <Button >修改</Button></Link>
-        /*       var ButtonUpdate=<Link  to={`/AdviceTypeCenter/update/${event.id}`}> <Button >修改</Button></Link>*/
+        /* var ButtonUpdate=<Link  to={`/AdviceTypeCenter/update/${event.id}`}> <Button >修改</Button></Link>*/
         var ButtonDetailed=<Link  to={{ pathname: '/AdviceTypeCenter/view', query: { id: event.id } }}> <Button >查看</Button></Link>
         var ButtonDel = <ModalTrigger modal={modal}  onConfirm={this.onConfirm}><Button >删除</Button></ModalTrigger>
         return (

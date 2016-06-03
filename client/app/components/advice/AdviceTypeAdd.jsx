@@ -4,6 +4,7 @@ import {Slider,Input,Icon,Grid,Col,Form,Button,Panel,FormGroup,UCheck,fieldset,B
 import request  from 'superagent';
 import {Router, Route, IndexRoute, browserHistory,Link} from 'react-router';
 import Rating,{PercentageSymbol} from 'react-rating';
+import {Alert} from '../common/index';
 export default class AdviceTypeAdd extends Component {
     constructor(props) {
         super(props);
@@ -18,12 +19,12 @@ export default class AdviceTypeAdd extends Component {
         request.get(`/api/users`).set("Authorization", {strStoreDate}.strStoreDate).type("json").end(function (err, res) {
             if (res.ok) {
                 var jsonarray=new Array();
-                for(var i=0;i<res.body.length;i++){
-                    var json={};
-                    json["value"]= res.body[i].id;
-                    json["label"]= res.body[i].name;
-                    jsonarray.push(json);
-                }
+                res.body.forEach(function(value){
+                  var json={};
+                  json["value"]= value.id;
+                  json["label"]= value.name;
+                  jsonarray.push(json);
+                })
                 e.setState({
                     selectData: jsonarray
                 })
@@ -53,8 +54,9 @@ export default class AdviceTypeAdd extends Component {
         request.post('/api/suggestion_types').send({"suggestion_type":json}).set("Authorization",{strStoreDate}.strStoreDate).type("json").end(function (err, res) {
             if (res.ok) {
                 {_this.open('保存成功')}
+
             } else {
-                alert('Oh no! error ' + res.text);
+                {_this.open(res.text)}
             }
         });
     };
@@ -69,7 +71,7 @@ export default class AdviceTypeAdd extends Component {
       var props = {
           name: 'selected',
           onChange: function(value) {
-                       document.querySelectorAll("#reviewList")[0].value=value;
+                document.querySelectorAll("#reviewList")[0].value=value;
           },
           multiple: true,
           maxHeight: 150,
@@ -83,20 +85,17 @@ export default class AdviceTypeAdd extends Component {
     <div  >
       <NavIndex/>
         <Grid>
-                 <Form horizontal onSubmit={this.onSubmit}>
+            <Form horizontal>
                   <Input type="textarea" label="类型名称：" labelClassName="am-u-sm-1"  wrapperClassName="am-u-sm-11" ref="name" id="name"  />
-                   <Input type="textarea" label="描述：" labelClassName="am-u-sm-1" wrapperClassName="am-u-sm-11" ref="description" />
-                   <label  className="am-u-sm-1 am-form-label">评审人：</label> <Selected {...props}   id="review"  data={this.state.selectData}   ref="select" />
-                    <Input  label="选中列表："  type="textarea"  labelClassName="am-u-sm-1"  readOnly wrapperClassName="am-u-sm-11" id="reviewList"   ></Input>
-                    <label  className="am-u-sm-1 am-form-label">是否公开：</label>
-                    <Input type="radio" name="doc-radio-2" label="是"  inline checked={this.state.public} ref="public" onChange={this.public} value="true" />:<Input type="radio" name="doc-radio-2" label="否"  rel="public"  inline onChange={this.public} value="false" checked={!this.state.public}/>
-                    <Input type="submit" amStyle="primary" value="保存"  wrapperClassName="am-u-sm-offset-1 am-u-sm-1"  />
-                </Form>
+                  <Input type="textarea" label="描述：" labelClassName="am-u-sm-1" wrapperClassName="am-u-sm-11" ref="description" />
+                  <label  className="am-u-sm-1 am-form-label">评审人：</label> <Selected {...props}   id="review"  data={this.state.selectData}   ref="select" />
+                  <Input  label="选中列表："  type="textarea"  labelClassName="am-u-sm-1"  readOnly wrapperClassName="am-u-sm-11" id="reviewList"   ></Input>
+                  <label  className="am-u-sm-1 am-form-label">是否公开：</label>
+                  <Input type="radio" name="doc-radio-2" label="是"  inline checked={this.state.public} ref="public" onChange={this.public} value="true" />:<Input type="radio" name="doc-radio-2" label="否"  rel="public"  inline onChange={this.public} value="false" checked={!this.state.public}/>
+                  <Input type="button" amStyle="secondary" value="新增" wrapperClassName="am-u-sm-offset-1 am-u-sm-1"  onClick={this.onSubmit} />
+            </Form>
         </Grid>
-        <ModalTrigger
-            modal={modal}
-            show={this.state.showModal}
-            onClose={this.close}/>
+        <ModalTrigger  modal={modal}    show={this.state.showModal}     onClose={this.close}/>
     </div>
     );
   }

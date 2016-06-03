@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
-import {Selected,Button}from 'amazeui-react';
+import {Selected,Button,Form}from 'amazeui-react';
 export default class AmazeUi extends Component {
   render() {
       var data = [
@@ -16,12 +16,10 @@ export default class AmazeUi extends Component {
           }
       };
       return (
-          <div>
-          <form >
+          <Form>
               类型：<Selected {...props} />
               <Button type="submit">筛选</Button>
-          </form>
-      </div>
+          </Form>
     );
   }
 }

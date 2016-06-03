@@ -35,7 +35,7 @@ export default class AdviceTypeUpdate extends Component {
             public :flag
         });
     };
-    //提交
+    //修改提交
     onSubmit=(e)=>{
         var _this=this;
         var json={};
