@@ -29,14 +29,14 @@ class Main extends Component {
 }
 render((
     <Router history={browserHistory}>
-        <Route path="/login" component={Main}>
+        <Route path="login" component={Main}>
             <Route path="/AdviceTypeCenter" component={AdviceTypeCenter}/>
             <Route path="/AdviceTypeCenter/update"   component={AdviceTypeUpdate} />
             <Route path="/AdviceTypeCenter/view"   component={AdviceTypeView} />
             <Route path="/AdviceTypeAdd"   component={AdviceTypeAdd} />
-            <Route path="*"   component={NotFound} />
+            <Route path="*"   component={NotFound}/>
         </Route>
-        <Route path="/" component={Login}></Route>
-        <Route path="/registered" component={Registered}></Route>
+        <Route path="/" component={Login}/>
+        <Route path="/registered" component={Registered}/>
     </Router>
 ), document.getElementById("main"))

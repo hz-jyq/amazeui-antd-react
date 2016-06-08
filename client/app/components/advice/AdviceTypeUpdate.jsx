@@ -107,12 +107,10 @@ export default class AdviceTypeUpdate extends Component {
                  <Form horizontal onSubmit={this.onSubmit}>
                   <Input type="textarea" label="类型名称：" labelClassName="am-u-sm-1"  wrapperClassName="am-u-sm-11" value={this.state.name}   ref="name" onChange={this.getName} id="name"/>
                    <Input type="textarea" label="描述：" labelClassName="am-u-sm-1" wrapperClassName="am-u-sm-11"  value={this.state.description}  ref="description" onChange={this.description} id="description"/>
-                  <div>
-                      <label  className="am-u-sm-1 am-form-label">评审人：</label> <Selected {...props}   ref="select"   />
-                      <Input  label="选中列表："  type="textarea"  labelClassName="am-u-sm-1" wrapperClassName="am-u-sm-11"  readOnly  value={this.state.reviewers.map(((item)=>{return item.id}))}   id="reviewList" ></Input>
-                      <label  className="am-u-sm-1 am-form-label">是否公开：</label>
+                    <label  className="am-u-sm-1 am-form-label">评审人：</label> <Selected {...props}   ref="select"   />
+                    <Input  label="选中列表："  type="textarea"  labelClassName="am-u-sm-1" wrapperClassName="am-u-sm-11"  readOnly  value={this.state.reviewers.map(((item)=>{return item.id}))}   id="reviewList" ></Input>
+                    <label  className="am-u-sm-1 am-form-label">是否公开：</label>
                      <Input type="radio" name="doc-radio-2" label="是"  inline checked={this.state.public} ref="public" onChange={this.public} value="true" />:<Input type="radio" name="doc-radio-2" label="否"  rel="public"  inline onChange={this.public} value="false" checked={!this.state.public}/>
-                  </div>
                    <Input type="submit" amStyle="primary" value="修改" wrapperClassName="am-u-sm-offset-1 am-u-sm-1"  />
                 </Form>
             </Col>

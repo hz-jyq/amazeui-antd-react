@@ -54,7 +54,6 @@ export default class AdviceTypeAdd extends Component {
         request.post('/api/suggestion_types').send({"suggestion_type":json}).set("Authorization",{strStoreDate}.strStoreDate).type("json").end(function (err, res) {
             if (res.ok) {
                 {_this.open('保存成功')}
-
             } else {
                 {_this.open(res.text)}
             }
@@ -86,13 +85,13 @@ export default class AdviceTypeAdd extends Component {
       <NavIndex/>
         <Grid>
             <Form horizontal>
-                  <Input type="textarea" label="类型名称：" labelClassName="am-u-sm-1"  wrapperClassName="am-u-sm-11" ref="name" id="name"  />
-                  <Input type="textarea" label="描述：" labelClassName="am-u-sm-1" wrapperClassName="am-u-sm-11" ref="description" />
-                  <label  className="am-u-sm-1 am-form-label">评审人：</label> <Selected {...props}   id="review"  data={this.state.selectData}   ref="select" />
-                  <Input  label="选中列表："  type="textarea"  labelClassName="am-u-sm-1"  readOnly wrapperClassName="am-u-sm-11" id="reviewList"   ></Input>
-                  <label  className="am-u-sm-1 am-form-label">是否公开：</label>
-                  <Input type="radio" name="doc-radio-2" label="是"  inline checked={this.state.public} ref="public" onChange={this.public} value="true" />:<Input type="radio" name="doc-radio-2" label="否"  rel="public"  inline onChange={this.public} value="false" checked={!this.state.public}/>
-                  <Input type="button" amStyle="secondary" value="新增" wrapperClassName="am-u-sm-offset-1 am-u-sm-1"  onClick={this.onSubmit} />
+                <Input type="textarea" label="类型名称：" labelClassName="am-u-sm-1"  wrapperClassName="am-u-sm-11" ref="name" id="name"  />
+                <Input type="textarea" label="描述：" labelClassName="am-u-sm-1" wrapperClassName="am-u-sm-11" ref="description" />
+                <label  className="am-u-sm-1 am-form-label">评审人：</label> <Selected {...props}    id="review"  data={this.state.selectData}   ref="select" />
+                <Input  label="选中列表："  type="textarea"  labelClassName="am-u-sm-1"  readOnly wrapperClassName="am-u-sm-11" id="reviewList"   ></Input>
+                <label  className="am-u-sm-1 am-form-label">是否公开：</label>
+                <Input type="radio" name="doc-radio-2" label="是"  inline checked={this.state.public} ref="public" onChange={this.public} value="true" />:<Input type="radio" name="doc-radio-2" label="否"  rel="public"  inline onChange={this.public} value="false" checked={!this.state.public}/>
+                <Input type="button" amStyle="secondary" value="新增" wrapperClassName="am-u-sm-offset-1 am-u-sm-1"  onClick={this.onSubmit} />
             </Form>
         </Grid>
         <ModalTrigger  modal={modal}    show={this.state.showModal}     onClose={this.close}/>

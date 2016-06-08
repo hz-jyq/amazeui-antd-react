@@ -8,8 +8,8 @@ export default class NavIndex extends Component {
             <Breadcrumb.Item>
                 <Icon icon="home" /><Link to="/login">首页</Link>
             </Breadcrumb.Item>
-            <Breadcrumb.Item >建议管理</Breadcrumb.Item>
-            <Breadcrumb.Item active>我的建议</Breadcrumb.Item>
+            <Breadcrumb.Item >后台管理</Breadcrumb.Item>
+            <Breadcrumb.Item active>建议类型</Breadcrumb.Item>
         </Breadcrumb>
     )
   }
