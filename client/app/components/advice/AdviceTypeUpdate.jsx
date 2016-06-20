@@ -17,7 +17,7 @@ export default class AdviceTypeUpdate extends Component {
         }
     };
     //类型名字
-    getName(e) {
+    getName=(e)=>{
         this.setState({
             name :e.target.value
         });

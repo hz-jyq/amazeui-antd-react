@@ -3,8 +3,9 @@ import {Router, Route, IndexRoute, browserHistory,Link} from 'react-router';
 import {Selected,ButtonToolbar,Header}from 'amazeui-react';
 export default class Title extends Component {
   render() {
+      var cutstomIcon =<img src="http://s.amazeui.org/media/i/brand/amazeui-cw.png" />;
       var props = {
-          title: '建议系统',
+          title: cutstomIcon,
           data: {
               left: [
                   {
@@ -20,7 +21,7 @@ export default class Title extends Component {
                   {
                       link: '/',
                       icon: 'user',
-                      title:'注销',
+                      title:'你好:jyq',
                       onSelect(){
                           localStorage.removeItem("Authorization")
                       }
