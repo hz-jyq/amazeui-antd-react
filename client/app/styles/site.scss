@@ -1,0 +1,61 @@
+body{
+  font-family: "source-serif-pro",Georgia,"Times New Roman",Times,serif;
+  color: #3a87ad;
+};
+$fontSize: 12px;
+h1,p{
+  text-align: center
+};
+img{
+  max-height: 480px
+}
+a{
+   cursor: pointer;
+   text-decoration:none !important;
+}
+.dataGrid{
+  height : 550px
+}
+.clear{
+  clear: both
+}
+.right{
+  float : right
+}
+.center{
+  width: 1700px;
+  margin-left: 10px;
+}
+.center div{
+  padding : 3px
+}
+.registered{
+  padding-top : 150px
+}
+.buttonPadding{
+  padding: 10px
+}
+.am-nav-header{
+ border-left: 3px solid #3bb4f2;
+ padding: 0 1em;
+ margin-top: .4em;
+ margin-bottom: .4em;
+}
+.admin-sidebar{
+  display: block;
+  position: static;
+  background: none;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 260px;
+  min-height: 100%;
+  float: left;
+  border-right: 1px solid #cecece;
+}
+.admin-main {
+    position: relative;
+    height: 100%;
+    padding-top: 10px;
+    background: #f3f3f3;
+}
