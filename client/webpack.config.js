@@ -35,7 +35,7 @@ const common = {
   },
   plugins: [
     new HtmlwebpackPlugin({
-      template: 'app/html/main.html',
+      template: 'app/index.html',
       inject: 'body'
     })
   ]
@@ -53,9 +53,8 @@ const different = function(build) {
         module: {
           loaders: [
             {
-              test: /\.sass$/,
-              loaders: ['style', 'css', 'sass?indentedSyntax=true'],
-              include: PATHS.app
+              test: /\.scss$/,
+              loader: 'style!css!sass?sourceMap'
             },
             {test: /\.css$/, loader: "style!css"},
           ]
@@ -96,7 +95,7 @@ const different = function(build) {
         module: {
           loaders: [
             {
-              test: /\.sass$/,
+              test: /\.scss$/,
               loader: ExtractTextPlugin.extract('style', ['css', 'sass?indentedSyntax=true']),
               include: PATHS.app
             },

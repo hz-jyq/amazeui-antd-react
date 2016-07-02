@@ -1,8 +1,14 @@
+$defaultHeight:550px !default;
+left{
+  float: left;
+}
+/**
+
+**/
 body{
   font-family: "source-serif-pro",Georgia,"Times New Roman",Times,serif;
   color: #3a87ad;
 };
-$fontSize: 12px;
 h1,p{
   text-align: center
 };
@@ -14,7 +20,7 @@ a{
    text-decoration:none !important;
 }
 .dataGrid{
-  height : 550px
+    height:$defaultHeight;
 }
 .clear{
   clear: both
@@ -23,11 +29,9 @@ a{
   float : right
 }
 .center{
-  width: 1700px;
-  margin-left: 10px;
-}
-.center div{
-  padding : 3px
+   div{
+     padding : 3px
+    }
 }
 .registered{
   padding-top : 150px
@@ -48,14 +52,24 @@ a{
   height: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
-  width: 260px;
+  width: auto;
   min-height: 100%;
-  float: left;
+  @extend  left;
   border-right: 1px solid #cecece;
+  padding-right: 0px;
 }
 .admin-main {
     position: relative;
     height: 100%;
-    padding-top: 10px;
-    background: #f3f3f3;
+    background:#f3f3f3;
+}
+.admin-center {
+    background:white;
+}
+@mixin opacity($opacity:50) {
+  opacity: $opacity / 100;
+  filter: alpha(opacity=$opacity);
+}
+.opacity-80{
+  @include opacity(80); //传递参数
 }

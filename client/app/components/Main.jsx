@@ -12,16 +12,19 @@ import AdviceTypeView from './advice/AdviceTypeView';
 import AdviceTypeAdd from './advice/AdviceTypeAdd';
 import request  from 'superagent';
 import  NotFound from './NotFound';
+import Footer from './FooterBuff';
 
 class Main extends Component {
     render() {
-        window.strStoreDate = window.localStorage? localStorage.getItem("Authorization"): Cookie.read("Authorization");
+      window.strStoreDate = window.localStorage? localStorage.getItem("Authorization"): Cookie.read("Authorization");
       return (
           <div>
               <Grid  className="doc-g">
                   <Title/>
-                  <Col sm={1}><Left/></Col>
-                  <Col sm={11}> {this.props.children}</Col>
+                  <div className="am-cf admin-main">
+                  <Col sm={2}><Left/></Col>
+                  <Col sm={10} className="admin-center"> {this.props.children}</Col>
+                  </div>
               </Grid>
           </div>
       )
@@ -29,10 +32,11 @@ class Main extends Component {
 }
 render((
     <Router history={browserHistory}>
-        <Route path="login" component={Main}>
+        <Route path="Main" component={Main}>
+            <IndexRoute component={AdviceTypeCenter}/>
             <Route path="/AdviceTypeCenter" component={AdviceTypeCenter}/>
-            <Route path="/AdviceTypeCenter/update"   component={AdviceTypeUpdate} />
-            <Route path="/AdviceTypeCenter/view"   component={AdviceTypeView} />
+            <Route path="/AdviceTypeCenter/update/:id"   component={AdviceTypeUpdate} />
+            <Route path="/AdviceTypeCenter/view/:id"   component={AdviceTypeView} />
             <Route path="/AdviceTypeAdd"   component={AdviceTypeAdd} />
             <Route path="*"   component={NotFound}/>
         </Route>

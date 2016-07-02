@@ -5,6 +5,7 @@ import request  from 'superagent';
 import {Router, Route, IndexRoute, browserHistory,Link} from 'react-router';
 import Rating,{PercentageSymbol} from 'react-rating';
 import {Alert} from '../common/index';
+import Footer from '../FooterBuff';
 export default class AdviceTypeAdd extends Component {
     constructor(props) {
         super(props);
@@ -18,9 +19,9 @@ export default class AdviceTypeAdd extends Component {
     loadCommentsFromServer =function(e) {
         request.get(`/api/users`).set("Authorization", {strStoreDate}.strStoreDate).type("json").end(function (err, res) {
             if (res.ok) {
-                var jsonarray=new Array();
+                const jsonarray=new Array();
                 res.body.forEach(function(value){
-                  var json={};
+                  const json={};
                   json["value"]= value.id;
                   json["label"]= value.name;
                   jsonarray.push(json);
@@ -81,8 +82,7 @@ export default class AdviceTypeAdd extends Component {
       };
         const modal = (<Modal type="alert" title="提示窗口">{this.state.modal}</Modal>);
         return (
-    <div  >
-      <NavIndex/>
+    <div >
         <Grid>
             <Form horizontal>
                 <Input type="textarea" label="类型名称：" labelClassName="am-u-sm-1"  wrapperClassName="am-u-sm-11" ref="name" id="name"  />
@@ -96,6 +96,7 @@ export default class AdviceTypeAdd extends Component {
         </Grid>
         <ModalTrigger  modal={modal}    show={this.state.showModal}     onClose={this.close}/>
     </div>
+
     );
   }
 }

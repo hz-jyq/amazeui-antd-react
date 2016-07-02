@@ -7,7 +7,7 @@ export default class  extends Component {
     constructor(props) {
         super(props);
         var  strStoreDate = window.localStorage? localStorage.getItem("Authorization"): Cookie.read("Authorization");
-        if(strStoreDate){this.props.history.replace('/login')}else{
+        if(strStoreDate){this.props.history.replace('/Main')}else{
         };
         this.state = {
             showModal: false,
@@ -33,7 +33,7 @@ export default class  extends Component {
                   } else {
                       Cookie.write("Authorization", Bearer+"arrDisplay");
                   }
-                  _this.props.history.replace('/login');
+                  _this.props.history.replace('/Main');
               } else {_this.open('Oh no! error ' + res.text)}
           });
           //存储身份验证

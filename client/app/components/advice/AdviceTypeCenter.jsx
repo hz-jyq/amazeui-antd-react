@@ -21,7 +21,7 @@ export default class AdviceTypeCenter extends Component {
                 <AdviceTypeDataGrid/>
                 <Pagtion/>
                 <Footer/>
-            </div>
+                </div>
         )
     }
 }

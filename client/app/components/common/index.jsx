@@ -39,7 +39,6 @@ export class Loading extends Component {
 export class ButtonUpdate extends Component {
     render() {
         const {pathname,query,type}=this.props;
-
         return (
               <Link to={{pathname: pathname, query:{id:query}}}><Button><Icon icon="edit"/>修改</Button></Link>
         );

@@ -7,7 +7,7 @@ export default  class AdviceTypeRow extends Component {
       onConfirm =(e)=>{
             var  strStoreDate = window.localStorage? localStorage.getItem("Authorization"): Cookie.read("Authorization");
             var _this=this;
-            request.delete(`/api/suggestion_types/${this.props.event.id}`).set('Content-Type', 'application/json').set("Authorization",strStoreDate).end(function (err, res) {
+            request.delete(`/api/suggestion_types/${this.props.event.id}`).type('json').set("Authorization",strStoreDate).end(function (err, res) {
                 if (res.ok) {
                     _this.props.handClick();
                 } else {
@@ -24,8 +24,8 @@ export default  class AdviceTypeRow extends Component {
                 <td>{event.name}</td>
                 <td>{event.description}</td>
                 <td>
-                  <ButtonDel pathname="/AdviceTypeCenter" query={event.id}/>
                   <ButtonUpdate pathname="/AdviceTypeCenter/update" query={event.id}/>
+                  <ButtonDel pathname="/AdviceTypeCenter" query={event.id}/>
                   <ButtonDetailed pathname="/AdviceTypeCenter/view" query={event.id}/>
                 </td>
             </tr>
