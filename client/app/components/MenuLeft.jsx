@@ -12,7 +12,7 @@ export default class MenuLeft extends Component {
           <div className="admin-sidebar am-offcanvas">
          <PanelGroup defaultActiveKey="1" accordion >
               <Panel header="用户管理"  eventKey="1" amStyle="white">
-              <List static fill>
+              <List static fill className="menu">
                     <ListItem><Icon icon="check"></Icon>每个人都有</ListItem>
                     <ListItem><Icon icon="check"></Icon>我把最深沉</ListItem>
                     <ListItem><Icon icon="check"></Icon>你不懂我</ListItem>
@@ -20,7 +20,7 @@ export default class MenuLeft extends Component {
             </List>
             </Panel>
             <Panel header="后台管理" eventKey="2" amStyle="white">
-              <List static fill>
+              <List static fill className="menu">
                 <ListItem><Link to="/AdviceTypeCenter"><Icon icon="check"/>建议类型</Link></ListItem>
                 <ListItem><Icon icon="check"></Icon>我把最深沉</ListItem>
             </List>
