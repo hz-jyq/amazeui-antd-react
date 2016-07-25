@@ -6,7 +6,7 @@ import Title from './Title';
 import Left from './Left';
 import Login from './user/Login';
 import Registered from './user/Registered';
-import AdviceTypeCenter from './advice/AdviceTypeCenter';
+import AdviceTypeCenter from './advice/*';
 import AdviceTypeUpdate from './advice/AdviceTypeUpdate';
 import AdviceTypeView from './advice/AdviceTypeView';
 import AdviceTypeAdd from './advice/AdviceTypeAdd';
@@ -35,8 +35,8 @@ render((
         <Route path="Main" component={Main}>
             <IndexRoute component={AdviceTypeCenter}/>
             <Route path="/AdviceTypeCenter" component={AdviceTypeCenter}/>
-            <Route path="/AdviceTypeCenter/update/:id"   component={AdviceTypeUpdate} />
-            <Route path="/AdviceTypeCenter/view/:id"   component={AdviceTypeView} />
+            <Route path="/AdviceTypeCenter/update"   component={AdviceTypeUpdate} />
+            <Route path="/AdviceTypeCenter/view"   component={AdviceTypeView} />
             <Route path="/AdviceTypeAdd"   component={AdviceTypeAdd} />
             <Route path="*"   component={NotFound}/>
         </Route>
