@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server  --hot --inline --devtool inline-source-map --history-api-fallback"
+    "start": "webpack-dev-server  -inline --content-base . --history-api-fallback"
   },
   "keywords": [],
   "author": "Junfeng Liu",

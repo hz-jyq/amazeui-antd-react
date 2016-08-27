@@ -27,9 +27,9 @@ render() {
                 <Panel header="用户注册">
                 <Form onSubmit={false}>
                     <fieldset className="am-form-set">
-                          <ValidationExample/>
-                          <Pwd  callbackParent={onChildChanged}/>
-                          <PwdRe  data={this.state.data} ref="pwder"/>
+                        <ValidationExample/>
+                        <Pwd  callbackParent={onChildChanged}/>
+                        <PwdRe  data={this.state.data} ref="pwder"/>
                          <Input type="email" placeholder="邮箱" standalone  />
                       </fieldset>
                      <Input type="submit" value="提交" amStyle="primary" block />

@@ -2,8 +2,11 @@ $defaultHeight:550px !default;
 left{
   float: left;
 }
+MarginTop{
+  margin-top: 10px;
+}
 /**
-
+ 下面为style样式
 **/
 body{
   font-family: "source-serif-pro",Georgia,"Times New Roman",Times,serif;
@@ -12,6 +15,9 @@ body{
 h1,p{
   text-align: center
 };
+.menu{
+  padding-left: 10%;
+}
 img{
   max-height: 480px
 }
@@ -72,4 +78,7 @@ a{
 }
 .opacity-80{
   @include opacity(80); //传递参数
+}
+.MarginTop{
+  @extend  MarginTop;
 }

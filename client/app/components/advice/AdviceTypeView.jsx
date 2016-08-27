@@ -23,7 +23,7 @@ export default class AdviceTypeView extends Component {
         });
     }
     componentDidMount() {
-        this.loadCommentsFromServer(this);
+          this.loadCommentsFromServer(this);
     }
   render() {
       return (

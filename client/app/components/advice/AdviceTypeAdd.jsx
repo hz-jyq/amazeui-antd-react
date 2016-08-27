@@ -82,7 +82,7 @@ export default class AdviceTypeAdd extends Component {
       };
         const modal = (<Modal type="alert" title="提示窗口">{this.state.modal}</Modal>);
         return (
-    <div >
+    <div className="MarginTop" >
         <Grid>
             <Form horizontal>
                 <Input type="textarea" label="类型名称：" labelClassName="am-u-sm-1"  wrapperClassName="am-u-sm-11" ref="name" id="name"  />
